@@ -1,7 +1,16 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  text-decoration: none; }
+
+.search-btn {
+  /* all: unset; */
+  cursor: pointer;
+  text-transform: capitalize; }
+
 /* @import 'core/variables';
-@import 'core/reset';
-@import 'components/code';
-@import 'components/links';
 @import 'layout/page';
 @import 'layout/header';
 @import 'layout/footer';
