@@ -8,7 +8,6 @@
 
 .main {
   margin: 30px;
-  width: 1000;
   flex-direction: column;
   justify-content: center;
   align-items: center;
@@ -31,32 +30,34 @@
   width: 300px;
   height: 20px; }
 
-.cards {
+.cards-section {
   margin: 30px;
-  width: 1000;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   text-align: center; }
-  .cards-title {
+  .cards-section-title {
     color: coral;
     text-transform: capitalize;
     margin-bottom: 30px; }
-  .cards-list {
-    width: 1000px;
+  .cards-section-list {
     display: flex;
     justify-content: flex-start;
     flex-wrap: wrap;
     gap: 20px; }
 
 .card {
+  cursor: pointer;
   border: 1px solid grey;
-  width: 150px;
+  width: 200px;
   height: 280px; }
   .card-img {
     width: 150px; }
   .card-name {
     font-size: 16px; }
+
+.selected {
+  background-color: burlywood; }
 
 /* @import 'core/variables';
 

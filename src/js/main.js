@@ -7,32 +7,48 @@ const searchInput = document.querySelector('.js-input');
 const searchBtn = document.querySelector('.js-btn');
 const cardsList = document.querySelector('.js-list');
 
+
 // Declaro un array vacío donde luego meteré los datos de la API
 let charactersList = [];
 
 
 //FUNCIONES
 
-//Función para pintar las tarjetas de cada personaje (aún no funciona)
+//Función para pintar la tarjeta en sí, con sus elementos de html
+function renderCards(character) {
+    
+    let card = `<li class="cards-list-item">
+    <article class="card js-card">
+      <img src="${character.img}" alt="Picture of ${character.name}" title="${character.name}" class="card-img" />
+      <h2 class="card-name">${character.name}</h2>
+      <p class="card-status">${character.status}</p>
+    </article>
+  </li>`;
+    return card;
+}
+
+//Función para pintar las tarjetas de cada personaje
 function renderCharactersList () {
     let characterCardList ='';
     for (const card of charactersList) {
         characterCardList += renderCards(card);
     }
     cardsList.innerHTML = characterCardList;
+    cardListeners ();
+    
   }
 
-//Función para pintar la tarjeta en sí, con sus elementos de html (aún no funciona)
-function renderCards(character) {
-    
-    let card = `<li class="cards-list-item">
-    <article class="card">
-      <img src="${character.img}" alt="" class="card-img" />
-      <h2 class="card-name">${character.name}</h2>
-      <p class="card-status">${character.status}</p>
-    </article>
-  </li>`;
-    return card;
+
+function handleClickCard (event){
+    console.log('holi');
+}
+
+//Función que crea un bucle para recorrer los elementos del array generado con QSA y así nos permite aplicarle el eventListener
+function cardListeners (){
+    const allCharacterCards = document.querySelectorAll('.js-card');
+    for (const eachCard of allCharacterCards) {
+        eachCard.addEventListener('click', handleClickCard);
+    }
 }
 
 

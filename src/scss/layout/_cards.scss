@@ -1,6 +1,5 @@
-.cards {
+.cards-section {
   margin: 30px;
-  width: 1000;
   flex-direction: column;
   justify-content: center;
   align-items: center;
@@ -12,7 +11,6 @@
     margin-bottom: 30px;
   }
   &-list {
-    width: 1000px;
     display: flex;
     justify-content: flex-start;
     flex-wrap: wrap;
@@ -21,8 +19,9 @@
 }
 
 .card {
+  cursor: pointer;
   border: 1px solid grey;
-  width: 150px;
+  width: 200px;
   height: 280px;
 
   &-img {
@@ -33,4 +32,8 @@
   }
   &-status {
   }
+}
+
+.selected {
+    background-color: burlywood;
 }
