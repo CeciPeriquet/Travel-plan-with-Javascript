@@ -1,18 +1,36 @@
 .cards {
-    margin: 30px;
+  margin: 30px;
+  width: 1000;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
 
-    &-title {
-        color: coral;
-        text-transform: capitalize;
-    }
+  &-title {
+    color: coral;
+    text-transform: capitalize;
+    margin-bottom: 30px;
+  }
+  &-list {
+    width: 1000px;
+    display: flex;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+    gap: 20px;
+  }
+}
 
-    &-img {
-        
-    }
-    &-name {
+.card {
+  border: 1px solid grey;
+  width: 150px;
+  height: 280px;
 
-    }
-    &-status {
-        
-    }
+  &-img {
+    width: 150px;
+  }
+  &-name {
+    font-size: 16px;
+  }
+  &-status {
+  }
 }
