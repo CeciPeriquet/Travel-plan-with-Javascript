@@ -1,1 +1,1 @@
-{"version":3,"sources":["main.js"],"names":[],"mappings":"AAAA;AACA;AACA","file":"main.js","sourcesContent":["'use strict';\n\n"]}
+{"version":3,"sources":["main.js"],"names":[],"mappings":"AAAA;AACA;AACA;AACA;AACA","file":"main.js","sourcesContent":["'use strict';\n\nconst searchInput = document.querySelector('.js-input');\nconst searchBtn = document.querySelector('.js-btn');\nconst cardsList = document.querySelector('.js-list');"]}
