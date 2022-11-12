@@ -30,39 +30,37 @@ function renderCards(character) {
 }
 
 //Función para pintar las tarjetas de cada personaje
-function renderCharactersList () {
-    let characterCardList ='';
-    for (const card of charactersList) {
-        characterCardList += renderCards(card);
-    }
-    cardsList.innerHTML = characterCardList;
-    cardListeners ();
-    
+function renderCharactersList() {
+  let characterCardList = "";
+  for (const card of charactersList) {
+    characterCardList += renderCards(card);
   }
+  cardsList.innerHTML = characterCardList;
+  cardListeners();
+}
 
 //Función para pintar la tarjeta en sí, esta vez para los personajes favoritos
 function renderFavCard(favCharacter) {
-    let favCard = `<li class="cards-list-item">
-    <article class="card js-card" id="${favCharacter.char_id}">
+  let favCard = `<li class="cards-list-item">
+    <article class="card js-card selected" id="${favCharacter.char_id}">
       <img src="${favCharacter.img}" alt="Picture of ${favCharacter.name}" title="${favCharacter.name}" class="card-img" />
       <h3 class="card-name">${favCharacter.name}</h3>
       <p class="card-status">${favCharacter.status}</p>
     </article>
   </li>`;
-    
+
   return favCard;
 }
 
 //Función para pintar las tarjetas de mis favoritos
 
-function renderFavCharacters(){
-let favCharacterCardList = "";
+function renderFavCharacters() {
+  let favCharacterCardList = "";
   for (const card of favouriteCharacters) {
     favCharacterCardList += renderFavCard(card);
   }
   favCardsList.innerHTML = favCharacterCardList;
 }
-
 
 // Función para buscar los obj seleccionados y generar un nuevo array con ellos
 function handleClickCard(event) {
@@ -70,11 +68,19 @@ function handleClickCard(event) {
   const current = parseInt(event.currentTarget.id);
 
   const selectedCard = charactersList.find(
-    (eachCardObj) => eachCardObj.char_id === current
+    (eachCardObj) => eachCardObj.char_id === current);
     //Busco el problema y era que una era string y otra number, uso typeof, por eso creo una variable donde recoger el nuevo valor (en nº) para comparar
-  );
+  
+  const cardFavouriteIndex = favouriteCharacters.findIndex(
+    (eachCardObj) => eachCardObj.char_id === current);
+  
+  //Si no está en favoritos, haz el push, si ya está, elimínala
+  if (cardFavouriteIndex === -1) { 
+    favouriteCharacters.push(selectedCard);
+  } else {
+    favouriteCharacters.splice(cardFavouriteIndex, 1);
+  }
 
-  favouriteCharacters.push(selectedCard);
   renderFavCharacters();
 }
 
