@@ -11,6 +11,7 @@ const favCardsList = document.querySelector(".js-fav-list");
 // Declaro un array vacío donde luego meteré los datos de la API
 let charactersList = [];
 
+//Array de favoritos (también vacío) a partir de las tarjetas seleccionadas
 let favouriteCharacters = [];
 
 //FUNCIONES
@@ -48,8 +49,7 @@ function renderFavCard(favCharacter) {
       <p class="card-status">${favCharacter.status}</p>
     </article>
   </li>`;
-    console.log(favCard);
-    console.log(favCharacter.name);
+    
   return favCard;
 }
 
@@ -61,10 +61,7 @@ let favCharacterCardList = "";
     favCharacterCardList += renderFavCard(card);
   }
   favCardsList.innerHTML = favCharacterCardList;
-  console.log(favCardsList);
 }
-
-
 
 
 // Función para buscar los obj seleccionados y generar un nuevo array con ellos
@@ -77,9 +74,7 @@ function handleClickCard(event) {
     //Busco el problema y era que una era string y otra number, uso typeof, por eso creo una variable donde recoger el nuevo valor (en nº) para comparar
   );
 
-  console.log(selectedCard);
   favouriteCharacters.push(selectedCard);
-  console.log(favouriteCharacters);
   renderFavCharacters();
 }
 
