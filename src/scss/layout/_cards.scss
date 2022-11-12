@@ -1,5 +1,10 @@
+.cards-lists-container {
+  display: flex;
+}
+
 .cards-section {
   margin: 30px;
+  width: 50vw;
   flex-direction: column;
   justify-content: center;
   align-items: center;
