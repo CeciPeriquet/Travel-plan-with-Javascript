@@ -16,6 +16,27 @@ let favouriteCharacters = [];
 
 //FUNCIONES
 
+//Mejoro la función para obtener los datos al abrir la página(localStorage/API)
+function getData(){
+
+const charactersListStored = JSON.parse(localStorage.getItem("charactersList"));
+
+if (charactersListStored !== null) {
+  //Si existe el listado de personajes en el localStorage, toma los datos de ahí y píntalos
+  charactersList = charactersListStored;
+  renderCharactersList();
+} else {
+  //Si no existe el listado de personajes en el localStorage, haz la petición al servidor y luego guarda los datos en localStorage
+  fetch("https://breakingbadapi.com/api/characters")
+    .then((response) => response.json())
+    .then((data) => {
+      charactersList = data;
+      localStorage.setItem("charactersList", JSON.stringify(charactersList));
+      renderCharactersList();
+    })
+}
+}
+
 //Función para pintar la tarjeta en sí, con sus elementos de html
 function renderCards(character) {
   let card = `<li class="cards-list-item">
@@ -61,16 +82,7 @@ function renderFavCharacters() {
   favCardsList.innerHTML = favCharacterCardList;
 }
 
-//Pido los datos a la API mediante Fetch (compruebo que me genera un array de objetos)
-function getData() {
-  fetch("https://breakingbadapi.com/api/characters")
-    .then((response) => response.json())
-    .then((data) => {
-      charactersList = data;
-      //no me estaba leyendo bien las funciones porque le pedía data.results y en este caso era solo data
-      renderCharactersList();
-    });
-}
+
 
 //Función para filtrar según lo que se escriba en el input (una vez dado al botón)
 function filterCards() {
@@ -87,6 +99,7 @@ function filterCards() {
      cardsList.innerHTML += filteredCard;
   }
 }
+
 
 //EVENTOS
 
@@ -131,5 +144,6 @@ function handleSearch(event) {
 //Evento para escuchar al botón de buscar
 searchBtn.addEventListener("click", handleSearch);
 
-//Al abrir la página, quiero los datos de la API
+//Al abrir la página, quiero los datos de la API (añado una nueva función para que guarde los datos en localStorage y a futuro sean los que utilice en lugar del fetch)
 getData();
+
