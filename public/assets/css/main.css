@@ -7,7 +7,7 @@
   font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif; }
 
 .header {
-  height: 180px;
+  height: 200px;
   width: 100%;
   background-image: url(../images/bb_header.jpeg);
   background-position: center;
@@ -28,7 +28,7 @@
   width: 60%;
   margin-left: auto;
   margin-right: auto;
-  transform: translateY(-50px);
+  transform: translateY(-40px);
   box-shadow: 1px 1px 4px 0px #afa9a9;
   display: flex;
   justify-content: center;
@@ -85,20 +85,24 @@
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
-  align-items: center;
-  gap: 5px; }
+  align-items: center; }
   .card-img {
     width: 160px;
-    height: 230px;
+    height: 220px;
     -o-object-fit: cover;
     object-fit: cover; }
   .card-name {
-    font-size: 16px; }
+    font-size: 15px;
+    font-weight: bold;
+    padding: 5px 0 3px 0; }
+  .card-status {
+    font-size: 14px; }
 
 .selected {
   background-color: burlywood; }
 
 .fa-square-xmark {
+  transform: translateY(-5px);
   color: rgba(0, 0, 0, 0.8);
   font-size: 28px; }
 

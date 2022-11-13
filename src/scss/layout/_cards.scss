@@ -1,5 +1,5 @@
 .cards-lists-container {
-  margin-top: 30px;;
+  margin-top: 30px;
   display: flex;
 }
 
@@ -37,25 +37,28 @@
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
-  gap: 5px;
 
   &-img {
     width: 160px;
-    height: 230px;
+    height: 220px;
     object-fit: cover;
   }
   &-name {
-    font-size: 16px;
+    font-size: 15px;
+    font-weight: bold;
+    padding: 5px 0 3px 0;
   }
   &-status {
+    font-size: 14px;
   }
 }
 
 .selected {
-    background-color: burlywood;
+  background-color: burlywood;
 }
 
 .fa-square-xmark {
+  transform: translateY(-5px);
   color: rgba($color: #000000, $alpha: 0.8);
   font-size: 28px;
 }
