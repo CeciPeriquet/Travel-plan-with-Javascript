@@ -4,7 +4,6 @@
 
 .cards-section {
   margin: 30px;
-  /* width: 50vw; */
   flex-direction: column;
   justify-content: center;
   align-items: center;
@@ -25,9 +24,10 @@
 
 .card {
   cursor: pointer;
-  border: 1px solid grey;
+  background-color: white;
   width: 200px;
   height: 280px;
+  box-shadow: 1px 1px 4px 0px #afa9a9;
 
   &-img {
     width: 150px;
