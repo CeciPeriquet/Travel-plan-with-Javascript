@@ -16,34 +16,22 @@ let favouriteCharacters = [];
 
 //FUNCIONES
 
-//Mejoro la función para obtener los datos al abrir la página(localStorage/API)
-function getData(){
-
-const charactersListStored = JSON.parse(localStorage.getItem("charactersList"));
-
-if (charactersListStored !== null) {
-  //Si existe el listado de personajes en el localStorage, toma los datos de ahí y píntalos
-  charactersList = charactersListStored;
-  renderCharactersList();
-} else {
-  //Si no existe el listado de personajes en el localStorage, haz la petición al servidor y luego guarda los datos en localStorage
-  fetch("https://breakingbadapi.com/api/characters")
+//RECOJO DATOS DE LA API. Vuelvo a la primera versión de la función con fetch, porque del localStorage sólo quiero las favoritas, y había guardado todas
+function getData() {
+  fetch('https://breakingbadapi.com/api/characters')
     .then((response) => response.json())
     .then((data) => {
-      charactersList = data;
-      localStorage.setItem("charactersList", JSON.stringify(charactersList));
-      renderCharactersList();
-    })
-}
-}
+        charactersList = data;
+        renderCharactersList();
+    })}
 
 //Función para pintar la tarjeta en sí, con sus elementos de html
 function renderCards(character) {
-  let card = `<li class="cards-list-item">
-    <article class="card js-card" id="${character.char_id}">
-      <img src="${character.img}" alt="Picture of ${character.name}" title="${character.name}" class="card-img" />
-      <h3 class="card-name">${character.name}</h3>
-      <p class="card-status">${character.status}</p>
+  let card = `<li class='cards-list-item'>
+    <article class='card js-card' id='${character.char_id}'>
+      <img src='${character.img}' alt='Picture of ${character.name}' title='${character.name}' class='card-img' />
+      <h3 class='card-name'>${character.name}</h3>
+      <p class='card-status'>${character.status}</p>
     </article>
   </li>`;
 
@@ -62,48 +50,45 @@ function renderCharactersList() {
 
 //Función para pintar la tarjeta en sí, esta vez para los personajes favoritos
 function renderFavCard(favCharacter) {
-  let favCard = `<li class="cards-list-item">
-    <article class="card js-card selected" id="${favCharacter.char_id}">
-      <img src="${favCharacter.img}" alt="Picture of ${favCharacter.name}" title="${favCharacter.name}" class="card-img" />
-      <h3 class="card-name">${favCharacter.name}</h3>
-      <p class="card-status">${favCharacter.status}</p>
+  let favCard = `<li class='cards-list-item'>
+    <article class='card js-fav-card selected' id='${favCharacter.char_id}'>
+      <img src='${favCharacter.img}' alt='Picture of ${favCharacter.name}' title='${favCharacter.name}' class='card-img' />
+      <h3 class='card-name'>${favCharacter.name}</h3>
+      <p class='card-status'>${favCharacter.status}</p>
     </article>
   </li>`;
 
   return favCard;
 }
 
-//Función para pintar el listado de tarjetas de mis favoritos
+//Función para PINTAR el listado de tarjetas de mis FAVORITOS
 function renderFavCharacters() {
   let favCharacterCardList = "";
   for (const card of favouriteCharacters) {
     favCharacterCardList += renderFavCard(card);
   }
   favCardsList.innerHTML = favCharacterCardList;
+  favCardListeners();
 }
 
-
-
-//Función para filtrar según lo que se escriba en el input (una vez dado al botón)
+//Función para FILTRAR según lo que se escriba en el input (una vez dado al botón)
 function filterCards() {
   const searchedCharacter = searchInput.value.toLowerCase();
   cardsList.innerHTML = "";
 
-  const filteredCharacters = charactersList
-    .filter((character) =>
-      character.name.toLowerCase().includes(searchedCharacter)
-    )
+  const filteredCharacters = charactersList.filter((character) =>
+    character.name.toLowerCase().includes(searchedCharacter)
+  );
 
   for (const character of filteredCharacters) {
-     const filteredCard = renderCards(character);
-     cardsList.innerHTML += filteredCard;
+    const filteredCard = renderCards(character);
+    cardsList.innerHTML += filteredCard;
   }
 }
 
-
 //EVENTOS
 
-//Función que crea un bucle para recorrer los elementos del array generado con QSA y así nos permite aplicarle el eventListener a cada tarjeta
+//Función que crea un bucle para recorrer los elementos del array generado con QSA y así nos permite aplicarle el EVENTLISTENER a cada tarjeta del listado general
 function cardListeners() {
   const allCharacterCards = document.querySelectorAll(".js-card");
   for (const eachCard of allCharacterCards) {
@@ -111,9 +96,18 @@ function cardListeners() {
   }
 }
 
+//Mismo tipo de función, esta vez para añadir listeners a las tarjetas favoritas
+function favCardListeners() {
+  const favCharacterCards = document.querySelectorAll(".js-fav-card");
+
+  for (const eachCard of favCharacterCards) {
+    eachCard.addEventListener("click", handleClickFavCard);
+  }
+}
+
 // Función para buscar los obj seleccionados y generar un nuevo array con ellos
 function handleClickCard(event) {
-  event.currentTarget.classList.toggle("selected");
+  //Elimino la línea de código que me pintaba la tarjeta en el listado general, sólo la quiero pintada en favoritos
   const current = parseInt(event.currentTarget.id);
 
   const selectedCard = charactersList.find(
@@ -125,14 +119,29 @@ function handleClickCard(event) {
     (eachCardObj) => eachCardObj.char_id === current
   );
 
-  //Si no está en favoritos, haz el push, si ya está, elimínala
+  //Si no está en favoritos, haz el push (cambio condicional para que ya no la elimine desde el listado general, sino desde favoritos, en otra parte del código)
   if (cardFavouriteIndex === -1) {
     favouriteCharacters.push(selectedCard);
-  } else {
-    favouriteCharacters.splice(cardFavouriteIndex, 1);
+    //guardo el listado de favoritas en localStorage
+    localStorage.setItem ('favourites' , JSON.stringify(favouriteCharacters));
   }
 
   renderFavCharacters();
+}
+
+//(Revisar, aún NO FUNCIONA) - Función para eliminar la tarjeta de favoritos, al clickarla
+function handleClickFavCard(event) {
+  const current = parseInt(event.currentTarget.id);
+  const selectedCard = favouriteCharacters.find(
+    (eachCardObj) => eachCardObj.char_id === current
+  );
+
+  const cardFavouriteIndex = favouriteCharacters.findIndex(
+    (eachCardObj) => eachCardObj.char_id === current
+  );
+  if (cardFavouriteIndex !== -1) {
+    favouriteCharacters.splice(cardFavouriteIndex, 1);
+  }
 }
 
 //Función manejadora del botón de buscar, que nos lleva a la función de filtrado
@@ -144,6 +153,5 @@ function handleSearch(event) {
 //Evento para escuchar al botón de buscar
 searchBtn.addEventListener("click", handleSearch);
 
-//Al abrir la página, quiero los datos de la API (añado una nueva función para que guarde los datos en localStorage y a futuro sean los que utilice en lugar del fetch)
+//Al abrir la página, quiero los datos de la API
 getData();
-

@@ -49,6 +49,7 @@
   align-items: center;
   text-align: center; }
   .cards-section-title {
+    font-size: 20px;
     color: coral;
     text-transform: capitalize;
     margin-bottom: 30px; }
