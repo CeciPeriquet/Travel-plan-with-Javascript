@@ -23,7 +23,9 @@ function getData() {
     .then((data) => {
         charactersList = data;
         renderCharactersList();
-    })}
+    })
+  
+  }
 
 //Función para pintar la tarjeta en sí, con sus elementos de html
 function renderCards(character) {
@@ -153,5 +155,13 @@ function handleSearch(event) {
 //Evento para escuchar al botón de buscar
 searchBtn.addEventListener("click", handleSearch);
 
-//Al abrir la página, quiero los datos de la API
+//Al abrir la página, quiero los datos de la API 
 getData();
+//y mis favoritas guardadas en localStorage
+const favouritesInLocalSt = JSON.parse(localStorage.getItem('favourites'));
+console.log(favouritesInLocalSt);
+
+if (favouritesInLocalSt !== null){
+favouriteCharacters = favouritesInLocalSt;
+renderFavCharacters();
+}
