@@ -12,18 +12,28 @@
   background-image: url(../images/bb_header.jpeg);
   background-position: center;
   background-repeat: no-repeat;
-  background-size: 1000px; }
+  background-size: 1100px; }
 
 .main {
   width: 100%;
   flex-direction: column;
-  justify-content: center;
-  align-items: center;
+  /*  justify-content: center; */
+  /* align-items: center; */
   text-align: center;
-  gap: 30px; }
+  gap: 20px; }
 
 .search {
-  margin: 30px; }
+  background-color: white;
+  height: 80px;
+  width: 60%;
+  margin-left: auto;
+  margin-right: auto;
+  transform: translateY(-50px);
+  box-shadow: 1px 1px 4px 0px #afa9a9;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px; }
 
 .search-btn {
   all: unset;
@@ -31,14 +41,19 @@
   text-transform: capitalize;
   color: white;
   background-color: coral;
-  padding: 2px; }
+  padding: 2px;
+  height: 30px;
+  width: 80px;
+  border-radius: 5px; }
 
 .search-input {
+  padding-left: 10px;
   border: 1px solid coral;
-  width: 300px;
-  height: 20px; }
+  width: 60%;
+  height: 26px; }
 
 .cards-lists-container {
+  margin-top: 30px;
   display: flex; }
 
 .cards-section {
@@ -49,38 +64,54 @@
   align-items: center;
   text-align: center; }
   .cards-section-title {
-    font-size: 20px;
+    font-size: 18px;
     color: coral;
     text-transform: capitalize;
     margin-bottom: 30px; }
   .cards-section-list {
     display: flex;
-    justify-content: flex-start;
+    justify-content: center;
+    align-items: center;
     flex-wrap: wrap;
     gap: 20px; }
 
 .card {
+  padding: 10px;
   cursor: pointer;
   background-color: white;
-  width: 200px;
-  height: 280px;
-  box-shadow: 1px 1px 4px 0px #afa9a9; }
+  width: 230px;
+  height: 310px;
+  box-shadow: 1px 1px 4px 0px #afa9a9;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 5px; }
   .card-img {
-    width: 150px; }
+    width: 160px;
+    height: 230px;
+    -o-object-fit: cover;
+    object-fit: cover; }
   .card-name {
     font-size: 16px; }
 
 .selected {
   background-color: burlywood; }
 
+.fa-square-xmark {
+  color: rgba(0, 0, 0, 0.8);
+  font-size: 28px; }
+
 .footer {
   background-color: coral;
   width: 100%;
-  height: 30%;
+  height: 30px;
   display: flex;
   justify-content: space-around;
   align-items: center;
-  padding: 5px; }
+  padding: 5px;
+  position: fixed;
+  bottom: 0; }
   .footer-text {
     color: white;
     font-size: 14px; }

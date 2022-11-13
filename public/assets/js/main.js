@@ -18,14 +18,13 @@ let favouriteCharacters = [];
 
 //RECOJO DATOS DE LA API. Vuelvo a la primera versión de la función con fetch, porque del localStorage sólo quiero las favoritas, y había guardado todas
 function getData() {
-  fetch('https://breakingbadapi.com/api/characters')
+  fetch("https://breakingbadapi.com/api/characters")
     .then((response) => response.json())
     .then((data) => {
-        charactersList = data;
-        renderCharactersList();
-    })
-  
-  }
+      charactersList = data;
+      renderCharactersList();
+    });
+}
 
 //Función para pintar la tarjeta en sí, con sus elementos de html
 function renderCards(character) {
@@ -52,11 +51,12 @@ function renderCharactersList() {
 
 //Función para pintar la tarjeta en sí, esta vez para los personajes favoritos
 function renderFavCard(favCharacter) {
-  let favCard = `<li class='cards-list-item'>
-    <article class='card js-fav-card selected' id='${favCharacter.char_id}'>
-      <img src='${favCharacter.img}' alt='Picture of ${favCharacter.name}' title='${favCharacter.name}' class='card-img' />
-      <h3 class='card-name'>${favCharacter.name}</h3>
-      <p class='card-status'>${favCharacter.status}</p>
+  let favCard = `<li class="cards-list-item">
+    <article class="card js-fav-card selected" id="${favCharacter.char_id}">
+      <i class="fa-solid fa-square-xmark"></i>  
+      <img src="${favCharacter.img}" alt="Picture of ${favCharacter.name}" title="${favCharacter.name}" class="card-img" />
+      <h3 class="card-name">${favCharacter.name}</h3>
+      <p class="card-status">${favCharacter.status}</p>
     </article>
   </li>`;
 
@@ -125,7 +125,7 @@ function handleClickCard(event) {
   if (cardFavouriteIndex === -1) {
     favouriteCharacters.push(selectedCard);
     //guardo el listado de favoritas en localStorage
-    localStorage.setItem ('favourites' , JSON.stringify(favouriteCharacters));
+    localStorage.setItem("favourites", JSON.stringify(favouriteCharacters));
   }
 
   renderFavCharacters();
@@ -155,14 +155,15 @@ function handleSearch(event) {
 //Evento para escuchar al botón de buscar
 searchBtn.addEventListener("click", handleSearch);
 
-//Al abrir la página, quiero los datos de la API 
+//Al abrir la página, quiero los datos de la API
 getData();
 //y mis favoritas guardadas en localStorage
-const favouritesInLocalSt = JSON.parse(localStorage.getItem('favourites'));
+const favouritesInLocalSt = JSON.parse(localStorage.getItem("favourites"));
 console.log(favouritesInLocalSt);
 
-if (favouritesInLocalSt !== null){
-favouriteCharacters = favouritesInLocalSt;
-renderFavCharacters();
+if (favouritesInLocalSt !== null) {
+  favouriteCharacters = favouritesInLocalSt;
+  renderFavCharacters();
 }
+
 //# sourceMappingURL=main.js.map
