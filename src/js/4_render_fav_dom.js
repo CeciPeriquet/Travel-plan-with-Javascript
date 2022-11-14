@@ -1,4 +1,4 @@
-'use strict';
+/* 'use strict';
 
 //Función para pintar la tarjeta en sí, esta vez para los personajes favoritos
 function renderFavCard(favCharacter) {
@@ -8,11 +8,11 @@ function renderFavCard(favCharacter) {
   liElement.classList.add('cards-list-item');
 
   const articleElement = document.createElement('article');
-  articleElement.classList.add('card js-fav-card selected');
+  articleElement.classList.add('card', 'js-fav-card', 'selected');
   articleElement.setAttribute('id', favCharacter.char_id);
 
   const crossElement = document.createElement('i');
-  crossElement.classList.add('fa-solid fa-square-xmark');
+  crossElement.classList.add('fa-solid', 'fa-square-xmark');
 
   const imgElem = document.createElement('img');
   imgElem.setAttribute('src', favCharacter.img);
@@ -37,18 +37,17 @@ function renderFavCard(favCharacter) {
   articleElement.appendChild(statusElement);
 
   liElement.appendChild(articleElement);
-  console.log(liElement);
-  const favCard = liElement;
 
+  const favCard = liElement;
   return favCard;
 }
 
-//Función para pintar el listado de tarjetas de mis FAVORITOS
+//Función para pintar el listado de tarjetas de mis favoritos, ahora con DOM
 function renderFavCharacters() {
-  let favCharacterCardList = '';
-  for (const card of favouriteCharacters) {
-    favCharacterCardList += renderFavCard(card);
+  for (const favCard of favouriteCharacters) {
+    favCardsList.appendChild(renderFavCard(favCard));
   }
-  favCardsList.innerHTML = favCharacterCardList;
+
   favCardListeners();
 }
+ */

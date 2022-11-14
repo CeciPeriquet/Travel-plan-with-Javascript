@@ -3,6 +3,7 @@
 //Función para eliminar la tarjeta de favoritos, al clickarla
 function handleClickFavCard(event) {
   const current = parseInt(event.currentTarget.id);
+
   const selectedCard = favouriteCharacters.find(
     (eachCardObj) => eachCardObj.char_id === current
   );
