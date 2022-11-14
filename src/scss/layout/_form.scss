@@ -17,7 +17,7 @@
   cursor: pointer;
   text-transform: capitalize;
   color: white;
-  background-color: coral;
+  background-color: $mainGreen;
   padding: 2px;
   height: 30px;
   width: 80px;
@@ -25,7 +25,7 @@
 }
 .search-input {
   padding-left: 10px;
-  border: 1px solid coral;
+  border: 1px solid $mainGreen;
   width: 60%;
   height: 26px;
 }
