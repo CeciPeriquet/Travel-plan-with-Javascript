@@ -102,7 +102,7 @@
   background-color: burlywood; }
 
 .fa-square-xmark {
-  transform: translateY(-5px);
+  transform: translate(102px, -10px);
   color: rgba(0, 0, 0, 0.8);
   font-size: 28px; }
 
