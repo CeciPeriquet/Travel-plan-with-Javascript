@@ -3,7 +3,7 @@
 //Función para eliminar la tarjeta de favoritos, al clickarla
 function handleClickFavCard(event) {
   const current = parseInt(event.currentTarget.id);
-
+  let cardFromWholeList = '';
   const selectedCard = favouriteCharacters.find(
     (eachCardObj) => eachCardObj.char_id === current
   );
@@ -13,9 +13,17 @@ function handleClickFavCard(event) {
   );
   if (cardFavouriteIndex !== -1) {
     favouriteCharacters.splice(cardFavouriteIndex, 1);
+    const findInWholeList = charactersList.find(
+      (eachCardObj) => eachCardObj.char_id === current
+    );
+    console.log(findInWholeList);
+    cardFromWholeList = renderCards(findInWholeList);
+    console.log(cardFromWholeList);
+    cardFromWholeList.classList.remove('selected');
   }
 
   renderFavCharacters();
+  renderCharactersList();
   localStorage.setItem('favourites', JSON.stringify(favouriteCharacters));
 }
 

@@ -74,7 +74,8 @@ function cardListeners() {
 
 // Función para buscar los obj seleccionados y generar un nuevo array con ellos
 function handleClickCard(event) {
-  //Elimino la línea de código que me pintaba la tarjeta en el listado general, sólo la quiero pintada en favoritos
+  //Recupero la línea de código que me pintaba la tarjeta en el listado general (ahora la quiero pintada en ambos listados)
+  event.currentTarget.classList.add('selected');
   const current = parseInt(event.currentTarget.id);
 
   const selectedCard = charactersList.find(
@@ -89,10 +90,14 @@ function handleClickCard(event) {
   //Si no está en favoritos, haz el push (cambio condicional para que ya no la elimine desde el listado general, sino desde favoritos, en otra parte del código)
   if (cardFavouriteIndex === -1) {
     favouriteCharacters.push(selectedCard);
-    //guardo el listado de favoritas en localStorage
-    localStorage.setItem('favourites', JSON.stringify(favouriteCharacters));
+  } else {
+    //añado la opción de que si el usuario vuelve a hacer click en el listado a una tarjeta favorita, también la quite de favoritos (no sólo clickando en la x de favoritas)
+    favouriteCharacters.splice(cardFavouriteIndex, 1);
+    event.currentTarget.classList.remove('selected');
+    console.log(event.currentTarget);
   }
-
+  //guardo el listado de favoritas en localStorage, con las actualizaciones del if/if else
+  localStorage.setItem('favourites', JSON.stringify(favouriteCharacters));
   renderFavCharacters();
 }
 
@@ -200,7 +205,7 @@ searchInput.addEventListener('input', handleReset);
 //Función para eliminar la tarjeta de favoritos, al clickarla
 function handleClickFavCard(event) {
   const current = parseInt(event.currentTarget.id);
-
+  let cardFromWholeList = '';
   const selectedCard = favouriteCharacters.find(
     (eachCardObj) => eachCardObj.char_id === current
   );
@@ -210,9 +215,17 @@ function handleClickFavCard(event) {
   );
   if (cardFavouriteIndex !== -1) {
     favouriteCharacters.splice(cardFavouriteIndex, 1);
+    const findInWholeList = charactersList.find(
+      (eachCardObj) => eachCardObj.char_id === current
+    );
+    console.log(findInWholeList);
+    cardFromWholeList = renderCards(findInWholeList);
+    console.log(cardFromWholeList);
+    cardFromWholeList.classList.remove('selected');
   }
 
   renderFavCharacters();
+  renderCharactersList();
   localStorage.setItem('favourites', JSON.stringify(favouriteCharacters));
 }
 
