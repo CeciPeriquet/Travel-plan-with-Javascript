@@ -20,3 +20,24 @@ if (favouritesInLocalSt !== null) {
   favouriteCharacters = favouritesInLocalSt;
   renderFavCharacters();
 }
+
+//Si hay algún favorito, el botón de render aparece (si no, no)
+if (favCardsList.innerHTML !== '') {
+  const resetButtonElement = document.createElement('button');
+  const resetButtonText = document.createTextNode('reset');
+  resetButtonElement.appendChild(resetButtonText);
+  resetButtonElement.classList.add('reset-button', 'js-reset-btn');
+  favCardsSection.appendChild(resetButtonElement);
+
+  const resetButton = document.querySelector('.js-reset-btn');
+
+  //Función manejadora del botón de reset, que borra los favoritos de la web y del localStorage y hace desaparecer al propio botón
+
+  function handleResetButton() {
+    favCardsList.innerHTML = '';
+    localStorage.removeItem('favourites');
+    favCardsSection.removeChild(resetButtonElement);
+  }
+
+  resetButton.addEventListener('click', handleResetButton);
+}

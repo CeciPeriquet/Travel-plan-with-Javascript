@@ -45,6 +45,7 @@ function renderFavCard(favCharacter) {
 //Función para pintar el listado de tarjetas de mis favoritos, ahora con DOM
 function renderFavCharacters() {
   favCardsList.innerHTML = '';
+
   for (const favCard of favouriteCharacters) {
     favCardsList.appendChild(renderFavCard(favCard));
   }

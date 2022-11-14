@@ -7,6 +7,7 @@ const searchInput = document.querySelector('.js-input');
 const searchBtn = document.querySelector('.js-btn');
 const cardsList = document.querySelector('.js-list');
 const favCardsList = document.querySelector('.js-fav-list');
+const favCardsSection = document.querySelector('.js-fav-cards');
 
 // Declaro un array vacío donde luego irán los datos de la API
 let charactersList = [];
@@ -35,6 +36,27 @@ const favouritesInLocalSt = JSON.parse(localStorage.getItem('favourites'));
 if (favouritesInLocalSt !== null) {
   favouriteCharacters = favouritesInLocalSt;
   renderFavCharacters();
+}
+
+//Si hay algún favorito, el botón de render aparece (si no, no)
+if (favCardsList.innerHTML !== '') {
+  const resetButtonElement = document.createElement('button');
+  const resetButtonText = document.createTextNode('reset');
+  resetButtonElement.appendChild(resetButtonText);
+  resetButtonElement.classList.add('reset-button', 'js-reset-btn');
+  favCardsSection.appendChild(resetButtonElement);
+
+  const resetButton = document.querySelector('.js-reset-btn');
+
+  //Función manejadora del botón de reset, que borra los favoritos de la web y del localStorage y hace desaparecer al propio botón
+
+  function handleResetButton() {
+    favCardsList.innerHTML = '';
+    localStorage.removeItem('favourites');
+    favCardsSection.removeChild(resetButtonElement);
+  }
+
+  resetButton.addEventListener('click', handleResetButton);
 }
 
 'use strict';
@@ -173,6 +195,7 @@ function renderFavCard(favCharacter) {
 //Función para pintar el listado de tarjetas de mis favoritos, ahora con DOM
 function renderFavCharacters() {
   favCardsList.innerHTML = '';
+
   for (const favCard of favouriteCharacters) {
     favCardsList.appendChild(renderFavCard(favCard));
   }
@@ -209,7 +232,7 @@ function handleSearch(event) {
 }
 
 //Función manejadora del input, para que al borrar nos enseñe de nuevo todo el listado
-function handleReset(event) {
+function handleResetInput(event) {
   event.preventDefault();
   let inputData = searchInput.value.toLowerCase();
   if (inputData === '') {
@@ -221,7 +244,7 @@ function handleReset(event) {
 searchBtn.addEventListener('click', handleSearch);
 
 //Nuevo evento para escuchar al input y que me vuelva a enseñar todas las tarjetas
-searchInput.addEventListener('input', handleReset);
+searchInput.addEventListener('input', handleResetInput);
 
 'use strict';
 
@@ -259,6 +282,8 @@ function favCardListeners() {
     eachCard.addEventListener('click', handleClickFavCard);
   }
 }
+
+'use strict';
 
 'use strict';
 

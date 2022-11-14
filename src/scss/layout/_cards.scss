@@ -1,7 +1,8 @@
 .cards-lists-container {
-  margin-top: 30px;
+  margin-top: 10px;
   display: flex;
   gap: 20px;
+  padding: 40px;
 }
 
 .cards-section {
@@ -9,6 +10,7 @@
   justify-content: center;
   align-items: center;
   text-align: center;
+  gap: 20px;
 
   &-title {
     font-size: 18px;
@@ -69,4 +71,17 @@
   transform: translate(97px, -5px);
   color: $mainGreen;
   font-size: 28px;
+}
+
+.reset-button {
+  all: unset;
+  cursor: pointer;
+  text-transform: capitalize;
+  color: white;
+  background-color: $mainGreen;
+  padding: 2px;
+  height: 30px;
+  width: 80px;
+  border-radius: 5px;
+  margin: 40px;
 }

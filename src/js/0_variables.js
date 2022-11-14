@@ -7,6 +7,7 @@ const searchInput = document.querySelector('.js-input');
 const searchBtn = document.querySelector('.js-btn');
 const cardsList = document.querySelector('.js-list');
 const favCardsList = document.querySelector('.js-fav-list');
+const favCardsSection = document.querySelector('.js-fav-cards');
 
 // Declaro un array vacío donde luego irán los datos de la API
 let charactersList = [];

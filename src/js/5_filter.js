@@ -27,7 +27,7 @@ function handleSearch(event) {
 }
 
 //Función manejadora del input, para que al borrar nos enseñe de nuevo todo el listado
-function handleReset(event) {
+function handleResetInput(event) {
   event.preventDefault();
   let inputData = searchInput.value.toLowerCase();
   if (inputData === '') {
@@ -39,4 +39,4 @@ function handleReset(event) {
 searchBtn.addEventListener('click', handleSearch);
 
 //Nuevo evento para escuchar al input y que me vuelva a enseñar todas las tarjetas
-searchInput.addEventListener('input', handleReset);
+searchInput.addEventListener('input', handleResetInput);
