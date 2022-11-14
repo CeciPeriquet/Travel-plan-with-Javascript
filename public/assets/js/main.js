@@ -41,24 +41,50 @@ if (favouritesInLocalSt !== null) {
 
 //Función para pintar la tarjeta en sí, con sus elementos de html
 function renderCards(character) {
-  let card = `<li class="cards-list-item">
-      <article class="card js-card" id="${character.char_id}">
-        <img src="${character.img}" alt="Picture of ${character.name}" title="${character.name}" class="card-img" />
-        <h3 class="card-name">${character.name}</h3>
-        <p class="card-status">${character.status}</p>
-      </article>
-    </li>`;
+  //Cambio la función para renderizar las tarjetas con DOM avanzado
+
+  const liElement = document.createElement('li');
+  liElement.classList.add('cards-list-item');
+
+  const articleElement = document.createElement('article');
+  articleElement.classList.add('card', 'js-card');
+  articleElement.setAttribute('id', character.char_id);
+
+  const imgElem = document.createElement('img');
+  imgElem.setAttribute('src', character.img);
+  imgElem.setAttribute('alt', `Picture of ${character.name}`);
+  imgElem.setAttribute('title', character.name);
+  imgElem.classList.add('card-img');
+
+  const nameElement = document.createElement('h3');
+  nameElement.classList.add('card-name');
+  const textNameElement = document.createTextNode(character.name);
+
+  const statusElement = document.createElement('p');
+  statusElement.classList.add('card-status');
+  const textStatusElement = document.createTextNode(character.status);
+
+  nameElement.appendChild(textNameElement);
+  statusElement.appendChild(textStatusElement);
+
+  articleElement.appendChild(imgElem);
+  articleElement.appendChild(nameElement);
+  articleElement.appendChild(statusElement);
+
+  liElement.appendChild(articleElement);
+
+  const card = liElement;
 
   return card;
 }
 
 //Función para pintar la lista completa de tarjetas de cada personaje
 function renderCharactersList() {
-  let characterCardList = '';
+  cardsList.innerHTML = '';
   for (const card of charactersList) {
-    characterCardList += renderCards(card);
+    cardsList.appendChild(renderCards(card));
   }
-  cardsList.innerHTML = characterCardList;
+
   cardListeners();
 }
 
@@ -94,7 +120,6 @@ function handleClickCard(event) {
     //añado la opción de que si el usuario vuelve a hacer click en el listado a una tarjeta favorita, también la quite de favoritos (no sólo clickando en la x de favoritas)
     favouriteCharacters.splice(cardFavouriteIndex, 1);
     event.currentTarget.classList.remove('selected');
-    console.log(event.currentTarget);
   }
   //guardo el listado de favoritas en localStorage, con las actualizaciones del if/if else
   localStorage.setItem('favourites', JSON.stringify(favouriteCharacters));
@@ -167,8 +192,7 @@ function filterCards() {
   );
 
   for (const character of filteredCharacters) {
-    const filteredCard = renderCards(character);
-    cardsList.innerHTML += filteredCard;
+    cardsList.appendChild(renderCards(character));
   }
 
   if (searchedCharacter === '') {
@@ -184,11 +208,10 @@ function handleSearch(event) {
   cardListeners();
 }
 
-//Función manejadora del input, para que al borrar nos enseñe de neuvo todo el listado
+//Función manejadora del input, para que al borrar nos enseñe de nuevo todo el listado
 function handleReset(event) {
   event.preventDefault();
   let inputData = searchInput.value.toLowerCase();
-  console.log(inputData);
   if (inputData === '') {
     renderCharactersList();
   }
@@ -218,9 +241,8 @@ function handleClickFavCard(event) {
     const findInWholeList = charactersList.find(
       (eachCardObj) => eachCardObj.char_id === current
     );
-    console.log(findInWholeList);
+
     cardFromWholeList = renderCards(findInWholeList);
-    console.log(cardFromWholeList);
     cardFromWholeList.classList.remove('selected');
   }
 

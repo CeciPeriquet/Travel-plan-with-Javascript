@@ -61,12 +61,12 @@
 }
 
 .selected {
-  background-image: linear-gradient(#64a1a4, $mainGreen);
+  background-image: linear-gradient(#ffffff, $mainGreen);
   color: white;
 }
 
 .fa-square-xmark {
   transform: translate(97px, -5px);
-  color: white;
+  color: $mainGreen;
   font-size: 28px;
 }

@@ -10,8 +10,7 @@ function filterCards() {
   );
 
   for (const character of filteredCharacters) {
-    const filteredCard = renderCards(character);
-    cardsList.innerHTML += filteredCard;
+    cardsList.appendChild(renderCards(character));
   }
 
   if (searchedCharacter === '') {
@@ -27,11 +26,10 @@ function handleSearch(event) {
   cardListeners();
 }
 
-//Función manejadora del input, para que al borrar nos enseñe de neuvo todo el listado
+//Función manejadora del input, para que al borrar nos enseñe de nuevo todo el listado
 function handleReset(event) {
   event.preventDefault();
   let inputData = searchInput.value.toLowerCase();
-  console.log(inputData);
   if (inputData === '') {
     renderCharactersList();
   }

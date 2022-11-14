@@ -30,7 +30,6 @@ function handleClickCard(event) {
     //añado la opción de que si el usuario vuelve a hacer click en el listado a una tarjeta favorita, también la quite de favoritos (no sólo clickando en la x de favoritas)
     favouriteCharacters.splice(cardFavouriteIndex, 1);
     event.currentTarget.classList.remove('selected');
-    console.log(event.currentTarget);
   }
   //guardo el listado de favoritas en localStorage, con las actualizaciones del if/if else
   localStorage.setItem('favourites', JSON.stringify(favouriteCharacters));
