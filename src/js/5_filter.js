@@ -19,6 +19,8 @@ function filterCards() {
 function handleSearch(event) {
   event.preventDefault();
   filterCards();
+  //Añado de nuevo la función cardListeners porque si no no me dejaba marcar como favoritas los resultados de búsqueda
+  cardListeners();
 }
 
 //Evento para escuchar al botón de buscar
