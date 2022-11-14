@@ -10,8 +10,6 @@ function cardListeners() {
 
 // Función para buscar los obj seleccionados y generar un nuevo array con ellos
 function handleClickCard(event) {
-  console.log('clicki');
-
   //Elimino la línea de código que me pintaba la tarjeta en el listado general, sólo la quiero pintada en favoritos
   const current = parseInt(event.currentTarget.id);
 
@@ -27,7 +25,6 @@ function handleClickCard(event) {
   //Si no está en favoritos, haz el push (cambio condicional para que ya no la elimine desde el listado general, sino desde favoritos, en otra parte del código)
   if (cardFavouriteIndex === -1) {
     favouriteCharacters.push(selectedCard);
-    console.log(favouriteCharacters);
     //guardo el listado de favoritas en localStorage
     localStorage.setItem('favourites', JSON.stringify(favouriteCharacters));
   }
