@@ -1,6 +1,6 @@
 'use strict';
 
-//(Aún NO FUNCIONA) - Función para eliminar la tarjeta de favoritos, al clickarla
+//Función para eliminar la tarjeta de favoritos, al clickarla
 function handleClickFavCard(event) {
   const current = parseInt(event.currentTarget.id);
   const selectedCard = favouriteCharacters.find(
@@ -13,6 +13,9 @@ function handleClickFavCard(event) {
   if (cardFavouriteIndex !== -1) {
     favouriteCharacters.splice(cardFavouriteIndex, 1);
   }
+
+  renderFavCharacters();
+  localStorage.setItem('favourites', JSON.stringify(favouriteCharacters));
 }
 
 //Bucle que recorre el array, esta vez para añadir listeners a las tarjetas favoritas

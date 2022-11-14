@@ -41,11 +41,11 @@ if (favouritesInLocalSt !== null) {
 
 //Función para pintar la tarjeta en sí, con sus elementos de html
 function renderCards(character) {
-  let card = `<li class='cards-list-item'>
-      <article class='card js-card' id='${character.char_id}'>
-        <img src='${character.img}' alt='Picture of ${character.name}' title='${character.name}' class='card-img' />
-        <h3 class='card-name'>${character.name}</h3>
-        <p class='card-status'>${character.status}</p>
+  let card = `<li class="cards-list-item">
+      <article class="card js-card" id="${character.char_id}">
+        <img src="${character.img}" alt="Picture of ${character.name}" title="${character.name}" class="card-img" />
+        <h3 class="card-name">${character.name}</h3>
+        <p class="card-status">${character.status}</p>
       </article>
     </li>`;
 
@@ -138,7 +138,7 @@ function renderFavCard(favCharacter) {
   return favCard;
 }
 
-//Función para PINTAR el listado de tarjetas de mis FAVORITOS
+//Función para pintar el listado de tarjetas de mis FAVORITOS
 function renderFavCharacters() {
   let favCharacterCardList = '';
   for (const card of favouriteCharacters) {
@@ -150,7 +150,7 @@ function renderFavCharacters() {
 
 'use strict';
 
-//(Aún NO FUNCIONA) - Función para eliminar la tarjeta de favoritos, al clickarla
+//Función para eliminar la tarjeta de favoritos, al clickarla
 function handleClickFavCard(event) {
   const current = parseInt(event.currentTarget.id);
   const selectedCard = favouriteCharacters.find(
@@ -163,6 +163,9 @@ function handleClickFavCard(event) {
   if (cardFavouriteIndex !== -1) {
     favouriteCharacters.splice(cardFavouriteIndex, 1);
   }
+
+  renderFavCharacters();
+  localStorage.setItem('favourites', JSON.stringify(favouriteCharacters));
 }
 
 //Bucle que recorre el array, esta vez para añadir listeners a las tarjetas favoritas

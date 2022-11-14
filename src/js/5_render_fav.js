@@ -14,7 +14,7 @@ function renderFavCard(favCharacter) {
   return favCard;
 }
 
-//Función para PINTAR el listado de tarjetas de mis FAVORITOS
+//Función para pintar el listado de tarjetas de mis FAVORITOS
 function renderFavCharacters() {
   let favCharacterCardList = '';
   for (const card of favouriteCharacters) {
