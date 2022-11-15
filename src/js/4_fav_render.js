@@ -49,6 +49,6 @@ function renderFavCharacters() {
   for (const favCard of favouriteCharacters) {
     favCardsList.appendChild(renderFavCard(favCard));
   }
-
+  paintReset();
   favCardListeners();
 }
