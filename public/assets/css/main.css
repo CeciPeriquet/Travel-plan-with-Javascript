@@ -47,14 +47,16 @@
   text-transform: capitalize;
   color: whitesmoke;
   background-color: #215f37;
+  font-size: 14px;
   padding: 2px;
   height: 30px;
-  width: 80px;
+  width: 60px;
   border-radius: 5px; }
   @media all and (min-width: 768px) {
     .search-btn {
       height: 30px;
-      width: 80px; } }
+      width: 80px;
+      font-size: 16px; } }
 
 .search-input {
   padding-left: 10px;
@@ -65,8 +67,12 @@
 .cards-lists-container {
   margin-top: 10px;
   display: flex;
-  gap: 20px;
-  padding: 40px; }
+  gap: 12px;
+  padding: 12px; }
+  @media all and (min-width: 768px) {
+    .cards-lists-container {
+      padding: 40px;
+      gap: 20px; } }
 
 .cards-section {
   flex-direction: column;
@@ -134,8 +140,8 @@
 
 .fa-square-xmark {
   color: whitesmoke;
-  font-size: 24px;
-  transform: translate(88px, -2px); }
+  font-size: 22px;
+  transform: translate(66px, -3px); }
   @media all and (min-width: 768px) {
     .fa-square-xmark {
       font-size: 26px;
@@ -149,9 +155,13 @@
   background-color: #d6a53e;
   padding: 2px;
   height: 30px;
-  width: 80px;
+  width: 60px;
   border-radius: 5px;
   margin-bottom: 20px; }
+  @media all and (min-width: 768px) {
+    .reset-button {
+      height: 30px;
+      width: 80px; } }
 
 .hidden {
   display: none; }

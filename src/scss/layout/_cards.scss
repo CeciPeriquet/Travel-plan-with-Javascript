@@ -1,8 +1,12 @@
 .cards-lists-container {
   margin-top: 10px;
   display: flex;
-  gap: 20px;
-  padding: 40px;
+  gap: 12px;
+  padding: 12px;
+  @media all and (min-width: 768px) {
+    padding: 40px;
+    gap: 20px;
+  }
 }
 
 .cards-section {
@@ -87,8 +91,8 @@
 
 .fa-square-xmark {
   color: $mainWhite;
-  font-size: 24px;
-  transform: translate(88px, -2px);
+  font-size: 22px;
+  transform: translate(66px, -3px);
 
   @media all and (min-width: 768px) {
     font-size: 26px;
@@ -104,9 +108,14 @@
   background-color: $mainYellow;
   padding: 2px;
   height: 30px;
-  width: 80px;
+  width: 60px;
+
   border-radius: 5px;
   margin-bottom: 20px;
+  @media all and (min-width: 768px) {
+    height: 30px;
+    width: 80px;
+  }
 }
 
 .hidden {

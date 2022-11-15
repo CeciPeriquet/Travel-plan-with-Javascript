@@ -21,14 +21,16 @@
   text-transform: capitalize;
   color: whitesmoke;
   background-color: $mainGreen;
+  font-size: 14px;
   padding: 2px;
   height: 30px;
-  width: 80px;
+  width: 60px;
   border-radius: 5px;
 
   @media all and (min-width: 768px) {
     height: 30px;
     width: 80px;
+    font-size: 16px;
   }
 }
 .search-input {
