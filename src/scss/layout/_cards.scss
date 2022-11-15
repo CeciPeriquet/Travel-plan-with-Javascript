@@ -14,7 +14,7 @@
 
   &-title {
     font-size: 18px;
-    color: #215f37;
+    color: $blueGreen;
     text-transform: capitalize;
     margin-bottom: 30px;
   }
@@ -25,6 +25,10 @@
     flex-wrap: wrap;
     gap: 20px;
   }
+}
+
+.heart {
+  color: $mainYellow;
 }
 
 .reg-cards {
@@ -42,7 +46,7 @@
 .card {
   padding: 10px;
   cursor: pointer;
-  background-color: white;
+  background-color: $mainWhite;
   width: 160px;
   height: 240px;
   box-shadow: 1px 1px 4px 0px #afa9a9;
@@ -77,13 +81,12 @@
 }
 
 .selected {
-  /* background-image: linear-gradient(#ffffff, $mainGreen); */
   background-color: $mainGreen;
-  color: white;
+  color: $mainWhite;
 }
 
 .fa-square-xmark {
-  color: white;
+  color: $mainWhite;
   font-size: 24px;
   transform: translate(88px, -2px);
 
@@ -97,8 +100,8 @@
   all: unset;
   cursor: pointer;
   text-transform: capitalize;
-  color: white;
-  background-color: #d6a53e;
+  color: $mainWhite;
+  background-color: $mainYellow;
   padding: 2px;
   height: 30px;
   width: 80px;

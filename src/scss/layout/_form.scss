@@ -1,5 +1,5 @@
 .search {
-  background-color: white;
+  background-color: $mainWhite;
   height: 80px;
   width: 80%;
   margin-left: auto;
@@ -19,7 +19,7 @@
   all: unset;
   cursor: pointer;
   text-transform: capitalize;
-  color: white;
+  color: whitesmoke;
   background-color: $mainGreen;
   padding: 2px;
   height: 30px;

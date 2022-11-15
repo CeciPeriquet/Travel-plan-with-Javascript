@@ -10,13 +10,16 @@ function getData() {
     });
 }
 
+function getLocalFav() {
+  const favouritesInLocalSt = JSON.parse(localStorage.getItem('favourites'));
+
+  if (favouritesInLocalSt !== null) {
+    favouriteCharacters = favouritesInLocalSt;
+    renderFavCharacters();
+  }
+}
+
 //Al abrir la página, quiero los datos de la API
 getData();
-
 //y mis favoritas guardadas en localStorage
-const favouritesInLocalSt = JSON.parse(localStorage.getItem('favourites'));
-
-if (favouritesInLocalSt !== null) {
-  favouriteCharacters = favouritesInLocalSt;
-  renderFavCharacters();
-}
+getLocalFav();

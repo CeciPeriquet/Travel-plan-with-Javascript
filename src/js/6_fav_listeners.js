@@ -21,6 +21,7 @@ function handleClickFavCard(event) {
 
   renderFavCharacters();
   renderCharactersList();
+
   localStorage.setItem('favourites', JSON.stringify(favouriteCharacters));
 }
 

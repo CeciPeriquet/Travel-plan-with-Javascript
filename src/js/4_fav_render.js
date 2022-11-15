@@ -50,5 +50,6 @@ function renderFavCharacters() {
     favCardsList.appendChild(renderFavCard(favCard));
   }
   paintReset();
+
   favCardListeners();
 }

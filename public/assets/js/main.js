@@ -27,16 +27,19 @@ function getData() {
     });
 }
 
+function getLocalFav() {
+  const favouritesInLocalSt = JSON.parse(localStorage.getItem('favourites'));
+
+  if (favouritesInLocalSt !== null) {
+    favouriteCharacters = favouritesInLocalSt;
+    renderFavCharacters();
+  }
+}
+
 //Al abrir la página, quiero los datos de la API
 getData();
-
 //y mis favoritas guardadas en localStorage
-const favouritesInLocalSt = JSON.parse(localStorage.getItem('favourites'));
-
-if (favouritesInLocalSt !== null) {
-  favouriteCharacters = favouritesInLocalSt;
-  renderFavCharacters();
-}
+getLocalFav();
 
 'use strict';
 
@@ -193,6 +196,7 @@ function renderFavCharacters() {
     favCardsList.appendChild(renderFavCard(favCard));
   }
   paintReset();
+
   favCardListeners();
 }
 
@@ -262,6 +266,7 @@ function handleClickFavCard(event) {
 
   renderFavCharacters();
   renderCharactersList();
+
   localStorage.setItem('favourites', JSON.stringify(favouriteCharacters));
 }
 
@@ -277,7 +282,12 @@ function favCardListeners() {
 'use strict';
 
 function paintReset() {
-  resetButton.classList.remove('hidden');
+  if (favouriteCharacters.length !== 0) {
+    resetButton.classList.remove('hidden');
+  } else {
+    resetButton.classList.add('hidden');
+  }
+
   function handleResetButton() {
     favCardsList.innerHTML = '';
     favouriteCharacters = [];

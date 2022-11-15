@@ -1,7 +1,12 @@
 'use strict';
 
 function paintReset() {
-  resetButton.classList.remove('hidden');
+  if (favouriteCharacters.length !== 0) {
+    resetButton.classList.remove('hidden');
+  } else {
+    resetButton.classList.add('hidden');
+  }
+
   function handleResetButton() {
     favCardsList.innerHTML = '';
     favouriteCharacters = [];
