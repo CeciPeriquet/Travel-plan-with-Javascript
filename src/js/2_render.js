@@ -8,7 +8,18 @@ function renderCards(character) {
   liElement.classList.add('cards-list-item');
 
   const articleElement = document.createElement('article');
-  articleElement.classList.add('card', 'js-card');
+  const current = character.char_id;
+
+  const cardFavouriteIndex = favouriteCharacters.findIndex(
+    (eachCardObj) => eachCardObj.char_id === current
+  );
+
+  if (cardFavouriteIndex !== -1) {
+    articleElement.classList.add('card', 'js-fav-card', 'selected');
+  } else {
+    articleElement.classList.add('card', 'js-card');
+  }
+
   articleElement.setAttribute('id', character.char_id);
 
   const imgElem = document.createElement('img');

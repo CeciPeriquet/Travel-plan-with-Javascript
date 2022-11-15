@@ -6,11 +6,11 @@ function handleClickCard(event) {
   event.currentTarget.classList.add('selected');
 
   const current = parseInt(event.currentTarget.id);
-  console.log(event.currentTarget);
 
   const selectedCard = charactersList.find(
     (eachCardObj) => eachCardObj.char_id === current
   );
+
   //Busco el problema y era que una era string y otra number, uso typeof, por eso creo una variable donde recoger el nuevo valor (en nº) para comparar
 
   const cardFavouriteIndex = favouriteCharacters.findIndex(

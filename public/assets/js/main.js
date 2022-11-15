@@ -7,7 +7,6 @@ const searchInput = document.querySelector('.js-input');
 const searchBtn = document.querySelector('.js-btn');
 const cardsList = document.querySelector('.js-list');
 const favCardsList = document.querySelector('.js-fav-list');
-const favCardsSection = document.querySelector('.js-fav-cards');
 const resetButton = document.querySelector('.js-reset-btn');
 
 // Declaro un array vacío donde luego irán los datos de la API
@@ -49,7 +48,18 @@ function renderCards(character) {
   liElement.classList.add('cards-list-item');
 
   const articleElement = document.createElement('article');
-  articleElement.classList.add('card', 'js-card');
+  const current = character.char_id;
+
+  const cardFavouriteIndex = favouriteCharacters.findIndex(
+    (eachCardObj) => eachCardObj.char_id === current
+  );
+
+  if (cardFavouriteIndex !== -1) {
+    articleElement.classList.add('card', 'js-fav-card', 'selected');
+  } else {
+    articleElement.classList.add('card', 'js-card');
+  }
+
   articleElement.setAttribute('id', character.char_id);
 
   const imgElem = document.createElement('img');
@@ -98,11 +108,11 @@ function handleClickCard(event) {
   event.currentTarget.classList.add('selected');
 
   const current = parseInt(event.currentTarget.id);
-  console.log(event.currentTarget);
 
   const selectedCard = charactersList.find(
     (eachCardObj) => eachCardObj.char_id === current
   );
+
   //Busco el problema y era que una era string y otra number, uso typeof, por eso creo una variable donde recoger el nuevo valor (en nº) para comparar
 
   const cardFavouriteIndex = favouriteCharacters.findIndex(
@@ -235,22 +245,20 @@ searchInput.addEventListener('input', handleResetInput);
 function handleClickFavCard(event) {
   const current = parseInt(event.currentTarget.id);
   let cardFromWholeList = '';
-  const selectedCard = favouriteCharacters.find(
-    (eachCardObj) => eachCardObj.char_id === current
-  );
 
   const cardFavouriteIndex = favouriteCharacters.findIndex(
     (eachCardObj) => eachCardObj.char_id === current
   );
-  if (cardFavouriteIndex !== -1) {
-    favouriteCharacters.splice(cardFavouriteIndex, 1);
-    const findInWholeList = charactersList.find(
-      (eachCardObj) => eachCardObj.char_id === current
-    );
 
-    cardFromWholeList = renderCards(findInWholeList);
-    cardFromWholeList.classList.remove('selected');
-  }
+  favouriteCharacters.splice(cardFavouriteIndex, 1);
+  const findInWholeList = charactersList.find(
+    (eachCardObj) => eachCardObj.char_id === current
+  );
+
+  console.log(findInWholeList);
+  cardFromWholeList = renderCards(findInWholeList);
+  cardFromWholeList.classList.remove('selected');
+  console.log(cardFromWholeList);
 
   renderFavCharacters();
   renderCharactersList();

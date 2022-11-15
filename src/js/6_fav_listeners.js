@@ -4,22 +4,20 @@
 function handleClickFavCard(event) {
   const current = parseInt(event.currentTarget.id);
   let cardFromWholeList = '';
-  const selectedCard = favouriteCharacters.find(
-    (eachCardObj) => eachCardObj.char_id === current
-  );
 
   const cardFavouriteIndex = favouriteCharacters.findIndex(
     (eachCardObj) => eachCardObj.char_id === current
   );
-  if (cardFavouriteIndex !== -1) {
-    favouriteCharacters.splice(cardFavouriteIndex, 1);
-    const findInWholeList = charactersList.find(
-      (eachCardObj) => eachCardObj.char_id === current
-    );
 
-    cardFromWholeList = renderCards(findInWholeList);
-    cardFromWholeList.classList.remove('selected');
-  }
+  favouriteCharacters.splice(cardFavouriteIndex, 1);
+  const findInWholeList = charactersList.find(
+    (eachCardObj) => eachCardObj.char_id === current
+  );
+
+  console.log(findInWholeList);
+  cardFromWholeList = renderCards(findInWholeList);
+  cardFromWholeList.classList.remove('selected');
+  console.log(cardFromWholeList);
 
   renderFavCharacters();
   renderCharactersList();
