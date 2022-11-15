@@ -42,6 +42,17 @@ function renderFavCard(favCharacter) {
   return favCard;
 }
 
+function paintFavSection() {
+  console.log(favouriteCharacters.length);
+  if (favouriteCharacters.length !== 0) {
+    favsSection.classList.remove('hidden');
+  } else {
+    favsSection.classList.add('hidden');
+  }
+  //Llamo a la función para pintar el reset
+  paintReset();
+}
+
 //Función para pintar el listado de tarjetas de mis favoritos, ahora con DOM
 function renderFavCharacters() {
   favCardsList.innerHTML = '';
@@ -49,7 +60,8 @@ function renderFavCharacters() {
   for (const favCard of favouriteCharacters) {
     favCardsList.appendChild(renderFavCard(favCard));
   }
-  paintReset();
+  //Si tenemos favoritos en el listado, llamo a la función para pintar la sección de fav
+  paintFavSection();
 
   favCardListeners();
 }

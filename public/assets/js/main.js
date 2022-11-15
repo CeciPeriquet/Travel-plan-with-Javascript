@@ -8,6 +8,7 @@ const searchBtn = document.querySelector('.js-btn');
 const cardsList = document.querySelector('.js-list');
 const favCardsList = document.querySelector('.js-fav-list');
 const resetButton = document.querySelector('.js-reset-btn');
+const favsSection = document.querySelector('.js-fav-cards');
 
 // Declaro un array vacío donde luego irán los datos de la API
 let charactersList = [];
@@ -188,6 +189,17 @@ function renderFavCard(favCharacter) {
   return favCard;
 }
 
+function paintFavSection() {
+  console.log(favouriteCharacters.length);
+  if (favouriteCharacters.length !== 0) {
+    favsSection.classList.remove('hidden');
+  } else {
+    favsSection.classList.add('hidden');
+  }
+  //Llamo a la función para pintar el reset
+  paintReset();
+}
+
 //Función para pintar el listado de tarjetas de mis favoritos, ahora con DOM
 function renderFavCharacters() {
   favCardsList.innerHTML = '';
@@ -195,7 +207,8 @@ function renderFavCharacters() {
   for (const favCard of favouriteCharacters) {
     favCardsList.appendChild(renderFavCard(favCard));
   }
-  paintReset();
+  //Si tenemos favoritos en el listado, llamo a la función para pintar la sección de fav
+  paintFavSection();
 
   favCardListeners();
 }
@@ -281,6 +294,7 @@ function favCardListeners() {
 
 'use strict';
 
+//Función para qeu el botón de reset aparezca sólo cuando hay favoritos
 function paintReset() {
   if (favouriteCharacters.length !== 0) {
     resetButton.classList.remove('hidden');
@@ -293,6 +307,7 @@ function paintReset() {
     favouriteCharacters = [];
     localStorage.setItem('favourites', favouriteCharacters);
     resetButton.classList.add('hidden');
+    favsSection.classList.add('hidden');
     const allCharacterCards = document.querySelectorAll('.js-card');
     for (const eachCard of allCharacterCards) {
       eachCard.classList.remove('selected');
