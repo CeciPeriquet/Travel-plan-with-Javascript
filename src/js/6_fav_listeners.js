@@ -14,10 +14,8 @@ function handleClickFavCard(event) {
     (eachCardObj) => eachCardObj.char_id === current
   );
 
-  console.log(findInWholeList);
   cardFromWholeList = renderCards(findInWholeList);
   cardFromWholeList.classList.remove('selected');
-  console.log(cardFromWholeList);
 
   renderFavCharacters();
   renderCharactersList();
