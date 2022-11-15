@@ -218,6 +218,7 @@ function renderFavCharacters() {
 function filterCards() {
   let searchedCharacter = searchInput.value.toLowerCase();
   cardsList.innerHTML = '';
+  console.log(searchedCharacter);
 
   const filteredCharacters = charactersList.filter((character) =>
     character.name.toLowerCase().includes(searchedCharacter)
@@ -235,6 +236,7 @@ function filterCards() {
 //Función manejadora del botón de buscar, que nos lleva a la función de filtrado
 function handleSearch(event) {
   event.preventDefault();
+  console.log('cliccckkkkiiii');
   filterCards();
   //Añado de nuevo la función cardListeners porque si no no me dejaba marcar como favoritas los resultados de búsqueda
   cardListeners();

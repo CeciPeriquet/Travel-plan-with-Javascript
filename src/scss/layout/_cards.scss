@@ -1,6 +1,7 @@
 .cards-lists-container {
   margin-top: 10px;
   display: flex;
+  justify-content: center;
   gap: 12px;
   padding: 12px;
   @media all and (min-width: 768px) {
