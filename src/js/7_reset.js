@@ -4,8 +4,12 @@
 
 function handleResetButton() {
   favCardsList.innerHTML = '';
-  localStorage.removeItem('favourites');
-  resetButton.classList.add('hidden');
+  favouriteCharacters = [];
+  localStorage.setItem('favourites', favouriteCharacters);
+  const allCharacterCards = document.querySelectorAll('.js-card');
+  for (const eachCard of allCharacterCards) {
+    eachCard.classList.remove('selected');
+  }
 }
 
 resetButton.addEventListener('click', handleResetButton);

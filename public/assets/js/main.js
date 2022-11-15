@@ -92,19 +92,13 @@ function renderCharactersList() {
 
 'use strict';
 
-//Función que crea un bucle para recorrer los elementos del array generado con QSA y así nos permite aplicarle el EVENTLISTENER a cada tarjeta del listado general
-function cardListeners() {
-  const allCharacterCards = document.querySelectorAll('.js-card');
-  for (const eachCard of allCharacterCards) {
-    eachCard.addEventListener('click', handleClickCard);
-  }
-}
-
 // Función para buscar los obj seleccionados y generar un nuevo array con ellos
 function handleClickCard(event) {
   //Recupero la línea de código que me pintaba la tarjeta en el listado general (ahora la quiero pintada en ambos listados)
   event.currentTarget.classList.add('selected');
+
   const current = parseInt(event.currentTarget.id);
+  console.log(event.currentTarget);
 
   const selectedCard = charactersList.find(
     (eachCardObj) => eachCardObj.char_id === current
@@ -127,9 +121,14 @@ function handleClickCard(event) {
   localStorage.setItem('favourites', JSON.stringify(favouriteCharacters));
 
   renderFavCharacters();
-  //Si hay algún favorito, el botón de render aparece (si no, no)
+}
 
-  resetButton.classList.remove('hidden');
+//Función que crea un bucle para recorrer los elementos del array generado con QSA y así nos permite aplicarle el EVENTLISTENER a cada tarjeta del listado general
+function cardListeners() {
+  const allCharacterCards = document.querySelectorAll('.js-card');
+  for (const eachCard of allCharacterCards) {
+    eachCard.addEventListener('click', handleClickCard);
+  }
 }
 
 'use strict';
@@ -273,8 +272,12 @@ function favCardListeners() {
 
 function handleResetButton() {
   favCardsList.innerHTML = '';
-  localStorage.removeItem('favourites');
-  resetButton.classList.add('hidden');
+  favouriteCharacters = [];
+  localStorage.setItem('favourites', favouriteCharacters);
+  const allCharacterCards = document.querySelectorAll('.js-card');
+  for (const eachCard of allCharacterCards) {
+    eachCard.classList.remove('selected');
+  }
 }
 
 resetButton.addEventListener('click', handleResetButton);
