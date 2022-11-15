@@ -62,6 +62,5 @@ function renderFavCharacters() {
   }
   //Si tenemos favoritos en el listado, llamo a la función para pintar la sección de fav
   paintFavSection();
-
   favCardListeners();
 }
