@@ -1,6 +1,40 @@
-# Adalab web starter kit
+# Evaluación Módulo 2 (Javascript)
 
-Ahoy! Este es nuestro Starter Kit creado en **node y gulp**. ¿Y qué es un Starter kit? Pues es una **plantilla de proyecto con funcionalidades preinstaladas y preconfiguradas**.
+## Cecilia Periquet
+
+Hola, éste es mi ejercicio para la evaluación final del Módulo 2 del bootcamp de Web Development de Adalab, consistente en JavaScript (aunque, como verás, también he utilizado HTML y CSS para llevarlo a cabo).
+
+## Tecnologías
+
+Este repositorio utiliza el **Starter Kit de Adalab** (por eso he podido utilizar SASS con partials, así como partials de JavaScript, manteniendo mucho más limpio mi código).
+Al final del todo encontrarás las instrucciones necesarias para usarlo y entenderlo mejor (ya que necesitas, por ejemplo, tener instalado [Node JS](https://nodejs.org/) para trabajar con este Starter Kit).
+
+## Enunciado
+
+El ejercicio pedía la realización de una web con un buscador de personajes de **Breaking Bad**, en el que se mostraran tarjetas con una fotografía, el nombre, y el estado (vivo o muerto).
+Estos datos se recogen directamente de la siguiente [API](https://breakingbadapi.com/) y clickando en las tarjetas de personajes, puedes ir guardando un listado de favoritos, que quedará registrado también en el **LocalStorage** de manera que permanece en la página aunque se refresque.
+
+También puedes buscar directamente a tus personajes usando el formulario y el botón corresponiente, y de ahí seleccionarlos como favoritos.
+
+## Bonus
+
+Los favoritos pueden borrarse tanto ckickando en el listado de favoritos, como en el listado normal, y todos ellos de golpe usando el botón de **reset** (que también los elimina del localStorage).
+
+Tanto el botón de reset de los personajes favoritos, como el hecho de que los puedas cerrar desde todas partes, como que aparezcan en el listado de favoritos con una x sobre la que clickar... son todo parte del bonus. Igualmente la maquetación, que aunque prima JavaScript, siempre se agradece algo de CSS.
+
+He optado por no mostrar el listado de favoritos ni el botón de reset hasta que la usuaria marca algún personaje como favorito.
+
+![BreakingBad_cperiquet](https://user-images.githubusercontent.com/112966265/201921222-2797f043-1428-4e71-ae8e-bee39c29c8d2.png)
+
+Posiblemente pensarás que podría estar mucho mejor, con un código más reducido, no tan repetitivo, pero si tenemos en cuenta que hace 3 semanas no sabía ni lo que era JavaScript... ni tan mal.
+
+No dejes de ver el resultado en la web adjunta al repositorio y sobre todo ¡jugar con tus personajes favoritos de la serie!
+
+![BreakingBad_cperiquet-favsection](https://user-images.githubusercontent.com/112966265/201921518-c6d97f87-604c-4936-9414-35c9e1167ad4.png)
+
+## Adalab web starter kit
+
+Starter Kit creado en **node y gulp**.
 
 Este Kit incluye un motor de plantillas HTML, el preprocesador SASS y un servidor local y muchas cosas más. El Kit nos ayuda a trabajar más cómodamente, nos automatiza tareas.
 
