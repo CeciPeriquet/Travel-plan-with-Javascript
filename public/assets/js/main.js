@@ -8,6 +8,7 @@ const searchBtn = document.querySelector('.js-btn');
 const cardsList = document.querySelector('.js-list');
 const favCardsList = document.querySelector('.js-fav-list');
 const favCardsSection = document.querySelector('.js-fav-cards');
+const resetButton = document.querySelector('.js-reset-btn');
 
 // Declaro un array vacío donde luego irán los datos de la API
 let charactersList = [];
@@ -36,27 +37,6 @@ const favouritesInLocalSt = JSON.parse(localStorage.getItem('favourites'));
 if (favouritesInLocalSt !== null) {
   favouriteCharacters = favouritesInLocalSt;
   renderFavCharacters();
-}
-
-//Si hay algún favorito, el botón de render aparece (si no, no)
-if (favCardsList.innerHTML !== '') {
-  const resetButtonElement = document.createElement('button');
-  const resetButtonText = document.createTextNode('reset');
-  resetButtonElement.appendChild(resetButtonText);
-  resetButtonElement.classList.add('reset-button', 'js-reset-btn');
-  favCardsSection.appendChild(resetButtonElement);
-
-  const resetButton = document.querySelector('.js-reset-btn');
-
-  //Función manejadora del botón de reset, que borra los favoritos de la web y del localStorage y hace desaparecer al propio botón
-
-  function handleResetButton() {
-    favCardsList.innerHTML = '';
-    localStorage.removeItem('favourites');
-    favCardsSection.removeChild(resetButtonElement);
-  }
-
-  resetButton.addEventListener('click', handleResetButton);
 }
 
 'use strict';
@@ -100,7 +80,7 @@ function renderCards(character) {
   return card;
 }
 
-//Función para pintar la lista completa de tarjetas de cada personaje
+//Función para pintar la lista completa de tarjetas de personajes
 function renderCharactersList() {
   cardsList.innerHTML = '';
   for (const card of charactersList) {
@@ -135,7 +115,7 @@ function handleClickCard(event) {
     (eachCardObj) => eachCardObj.char_id === current
   );
 
-  //Si no está en favoritos, haz el push (cambio condicional para que ya no la elimine desde el listado general, sino desde favoritos, en otra parte del código)
+  //Si no está en favoritos, haz el push
   if (cardFavouriteIndex === -1) {
     favouriteCharacters.push(selectedCard);
   } else {
@@ -143,9 +123,13 @@ function handleClickCard(event) {
     favouriteCharacters.splice(cardFavouriteIndex, 1);
     event.currentTarget.classList.remove('selected');
   }
-  //guardo el listado de favoritas en localStorage, con las actualizaciones del if/if else
+  //guardo el listado de favoritas en localStorage, con las actualizaciones del if/else
   localStorage.setItem('favourites', JSON.stringify(favouriteCharacters));
+
   renderFavCharacters();
+  //Si hay algún favorito, el botón de render aparece (si no, no)
+
+  resetButton.classList.remove('hidden');
 }
 
 'use strict';
@@ -285,6 +269,14 @@ function favCardListeners() {
 
 'use strict';
 
-'use strict';
+//Función manejadora del botón de reset, que borra los favoritos de la web y del localStorage y hace desaparecer al propio botón
+
+function handleResetButton() {
+  favCardsList.innerHTML = '';
+  localStorage.removeItem('favourites');
+  resetButton.classList.add('hidden');
+}
+
+resetButton.addEventListener('click', handleResetButton);
 
 //# sourceMappingURL=main.js.map

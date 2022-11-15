@@ -23,7 +23,7 @@ function handleClickCard(event) {
     (eachCardObj) => eachCardObj.char_id === current
   );
 
-  //Si no está en favoritos, haz el push (cambio condicional para que ya no la elimine desde el listado general, sino desde favoritos, en otra parte del código)
+  //Si no está en favoritos, haz el push
   if (cardFavouriteIndex === -1) {
     favouriteCharacters.push(selectedCard);
   } else {
@@ -31,7 +31,11 @@ function handleClickCard(event) {
     favouriteCharacters.splice(cardFavouriteIndex, 1);
     event.currentTarget.classList.remove('selected');
   }
-  //guardo el listado de favoritas en localStorage, con las actualizaciones del if/if else
+  //guardo el listado de favoritas en localStorage, con las actualizaciones del if/else
   localStorage.setItem('favourites', JSON.stringify(favouriteCharacters));
+
   renderFavCharacters();
+  //Si hay algún favorito, el botón de render aparece (si no, no)
+
+  resetButton.classList.remove('hidden');
 }

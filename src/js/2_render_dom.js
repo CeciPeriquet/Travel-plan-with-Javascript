@@ -39,7 +39,7 @@ function renderCards(character) {
   return card;
 }
 
-//Función para pintar la lista completa de tarjetas de cada personaje
+//Función para pintar la lista completa de tarjetas de personajes
 function renderCharactersList() {
   cardsList.innerHTML = '';
   for (const card of charactersList) {
