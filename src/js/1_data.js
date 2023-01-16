@@ -2,7 +2,7 @@
 
 //RECOJO DATOS DE LA API. Vuelvo a la primera versión de la función con fetch, porque del localStorage sólo quiero las favoritas, y había guardado todas
 function getData() {
-  fetch('https://breakingbadapi.com/api/characters')
+  fetch('./assets/data/characters.json')
     .then((response) => response.json())
     .then((data) => {
       charactersList = data;
