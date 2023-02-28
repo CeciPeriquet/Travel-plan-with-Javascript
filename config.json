@@ -12,11 +12,7 @@
     "dest": "public/api/",
     "dist": "docs/api/"
   },
-  "data": {
-    "src": "src/data/**.json",
-    "dest": "public/assets/data",
-    "dist": "docs/assets/data/"
-  },
+
   "css": {
     "src": "src/scss/**/*.scss",
     "dest": "public/assets/css/",

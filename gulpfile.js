@@ -90,26 +90,6 @@ gulp.task('images', (done) => {
   done();
 });
 
-gulp.task('data', (done) => {
-  gulp
-    .src(config.data.src)
-    .pipe(
-      plumber({ errorHandler: notify.onError('Error: <%= error.message %>') })
-    )
-    .pipe(gulp.dest(config.data.dest));
-  done();
-});
-
-gulp.task('data-dist', (done) => {
-  gulp
-    .src(config.data.src)
-    .pipe(
-      plumber({ errorHandler: notify.onError('Error: <%= error.message %>') })
-    )
-    .pipe(gulp.dest(config.data.dist));
-  done();
-});
-
 gulp.task('js', (done) => {
   gulp
     .src(config.js.src)
@@ -150,19 +130,15 @@ gulp.task('images-dist', (done) => {
 
 gulp.task(
   'default',
-  gulp.series(
-    ['clean', 'api', 'html', 'css', 'js', 'images', 'data'],
-    (done) => {
-      browserSync.init({ server: { baseDir: './public/' } });
-      gulp.watch(config.api.src, gulp.series(['api', 'bs-reload']));
-      gulp.watch(config.css.src, gulp.series('css'));
-      gulp.watch(config.images.src, gulp.series(['images', 'bs-reload']));
-      gulp.watch(config.data.src, gulp.series(['data', 'bs-reload']));
-      gulp.watch(config.js.src, gulp.series(['js', 'bs-reload']));
-      gulp.watch(config.watch.html, gulp.series(['html', 'bs-reload']));
-      done();
-    }
-  )
+  gulp.series(['clean', 'api', 'html', 'css', 'js', 'images'], (done) => {
+    browserSync.init({ server: { baseDir: './public/' } });
+    gulp.watch(config.api.src, gulp.series(['api', 'bs-reload']));
+    gulp.watch(config.css.src, gulp.series('css'));
+    gulp.watch(config.images.src, gulp.series(['images', 'bs-reload']));
+    gulp.watch(config.js.src, gulp.series(['js', 'bs-reload']));
+    gulp.watch(config.watch.html, gulp.series(['html', 'bs-reload']));
+    done();
+  })
 );
 
 gulp.task(
@@ -175,7 +151,6 @@ gulp.task(
       'html-dist',
       'js-dist',
       'images-dist',
-      'data-dist',
       // 'icons-dist'
     ],
     (done) => done()

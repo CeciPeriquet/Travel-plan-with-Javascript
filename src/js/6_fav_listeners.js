@@ -5,7 +5,7 @@ function handleClickFavCard(event) {
   const current = parseInt(event.currentTarget.id);
   let cardFromWholeList = '';
 
-  const cardFavouriteIndex = favouriteCharacters.findIndex(
+  const cardFavouriteIndex = favouriteCountries.findIndex(
     (eachCardObj) => eachCardObj.char_id === current
   );
 
@@ -17,17 +17,17 @@ function handleClickFavCard(event) {
   cardFromWholeList = renderCards(findInWholeList);
   cardFromWholeList.classList.remove('selected');
 
-  renderFavCharacters();
-  renderCharactersList();
+  renderFavCountries();
+  renderCountriesList();
 
-  localStorage.setItem('favourites', JSON.stringify(favouriteCharacters));
+  localStorage.setItem('favourites', JSON.stringify(favouriteCountries));
 }
 
 //Bucle que recorre el array, esta vez para añadir listeners a las tarjetas favoritas
 function favCardListeners() {
-  const favCharacterCards = document.querySelectorAll('.js-fav-card');
+  const favCountriesCards = document.querySelectorAll('.js-fav-card');
 
-  for (const eachCard of favCharacterCards) {
+  for (const eachCard of favCountriesCards) {
     eachCard.addEventListener('click', handleClickFavCard);
   }
 }

@@ -7,34 +7,34 @@ function handleClickCard(event) {
 
   const current = parseInt(event.currentTarget.id);
 
-  const selectedCard = charactersList.find(
-    (eachCardObj) => eachCardObj.char_id === current
+  const selectedCard = countriesList.find(
+    (eachCardObj) => eachCardObj.id === current
   );
 
   //Busco el problema y era que una era string y otra number, uso typeof, por eso creo una variable donde recoger el nuevo valor (en nº) para comparar
 
-  const cardFavouriteIndex = favouriteCharacters.findIndex(
-    (eachCardObj) => eachCardObj.char_id === current
+  const cardFavouriteIndex = favouriteCountries.findIndex(
+    (eachCardObj) => eachCardObj.id === current
   );
 
   //Si no está en favoritos, haz el push
   if (cardFavouriteIndex === -1) {
-    favouriteCharacters.push(selectedCard);
+    favouriteCountries.push(selectedCard);
   } else {
     //añado la opción de que si el usuario vuelve a hacer click en el listado a una tarjeta favorita, también la quite de favoritos (no sólo clickando en la x de favoritas)
-    favouriteCharacters.splice(cardFavouriteIndex, 1);
+    favouriteCountries.splice(cardFavouriteIndex, 1);
     event.currentTarget.classList.remove('selected');
   }
   //guardo el listado de favoritas en localStorage, con las actualizaciones del if/else
-  localStorage.setItem('favourites', JSON.stringify(favouriteCharacters));
+  localStorage.setItem('favourites', JSON.stringify(favouriteCountries));
 
-  renderFavCharacters();
+  renderFavCountries();
 }
 
 //Función que crea un bucle para recorrer los elementos del array generado con QSA y así nos permite aplicarle el EVENTLISTENER a cada tarjeta del listado general
 function cardListeners() {
-  const allCharacterCards = document.querySelectorAll('.js-card');
-  for (const eachCard of allCharacterCards) {
+  const allCountryCards = document.querySelectorAll('.js-card');
+  for (const eachCard of allCountryCards) {
     eachCard.addEventListener('click', handleClickCard);
   }
 }

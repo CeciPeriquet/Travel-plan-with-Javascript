@@ -11,20 +11,33 @@ const resetButton = document.querySelector('.js-reset-btn');
 const favsSection = document.querySelector('.js-fav-cards');
 
 // Declaro un array vacío donde luego irán los datos de la API
-let charactersList = [];
+let countriesList = [];
 
 //Array de favoritos (también vacío) a partir de las tarjetas seleccionadas
-let favouriteCharacters = [];
+let favouriteCountries = [];
 
 'use strict';
 
 //RECOJO DATOS DE LA API. Vuelvo a la primera versión de la función con fetch, porque del localStorage sólo quiero las favoritas, y había guardado todas
 function getData() {
-  fetch('./assets/data/characters.json')
+  fetch('https://restcountries.com/v3.1/all/')
     .then((response) => response.json())
     .then((data) => {
-      charactersList = data;
-      renderCharactersList();
+      const cleanData = data.map((country) => {
+        return {
+          name: country.name.common,
+          id: Math.floor(Math.random() * 500),
+          img: country.flags.png,
+          alt: country.flags.alt,
+          continent: country.continents[0],
+          capital: country.capital,
+          currencies: country.currencies,
+        };
+      });
+      console.log(cleanData);
+
+      countriesList = cleanData;
+      renderCountriesList();
     });
 }
 
@@ -32,8 +45,8 @@ function getLocalFav() {
   const favouritesInLocalSt = JSON.parse(localStorage.getItem('favourites'));
 
   if (favouritesInLocalSt !== null) {
-    favouriteCharacters = favouritesInLocalSt;
-    renderFavCharacters();
+    favouriteCountries = favouritesInLocalSt;
+    renderFavCountries();
   }
 }
 
@@ -45,17 +58,16 @@ getLocalFav();
 'use strict';
 
 //Función para pintar la tarjeta en sí, con sus elementos de html
-function renderCards(character) {
+function renderCards(country) {
   //Cambio la función para renderizar las tarjetas con DOM avanzado
 
   const liElement = document.createElement('li');
   liElement.classList.add('cards-list-item');
 
   const articleElement = document.createElement('article');
-  const current = character.char_id;
 
-  const cardFavouriteIndex = favouriteCharacters.findIndex(
-    (eachCardObj) => eachCardObj.char_id === current
+  const cardFavouriteIndex = favouriteCountries.findIndex(
+    (eachCardObj) => eachCardObj.id === country.id
   );
 
   if (cardFavouriteIndex !== -1) {
@@ -64,28 +76,28 @@ function renderCards(character) {
     articleElement.classList.add('card', 'js-card');
   }
 
-  articleElement.setAttribute('id', character.char_id);
+  articleElement.setAttribute('id', country.id);
 
   const imgElem = document.createElement('img');
-  imgElem.setAttribute('src', character.img);
-  imgElem.setAttribute('alt', `Picture of ${character.name}`);
-  imgElem.setAttribute('title', character.name);
+  imgElem.setAttribute('src', country.img);
+  imgElem.setAttribute('alt', country.alt);
+  imgElem.setAttribute('title', country.name);
   imgElem.classList.add('card-img');
 
   const nameElement = document.createElement('h3');
   nameElement.classList.add('card-name');
-  const textNameElement = document.createTextNode(character.name);
+  const textNameElement = document.createTextNode(country.name);
 
-  const statusElement = document.createElement('p');
-  statusElement.classList.add('card-status');
-  const textStatusElement = document.createTextNode(character.status);
+  const continentElement = document.createElement('p');
+  continentElement.classList.add('card-continent');
+  const textContinentElement = document.createTextNode(country.continent);
 
   nameElement.appendChild(textNameElement);
-  statusElement.appendChild(textStatusElement);
+  continentElement.appendChild(textContinentElement);
 
   articleElement.appendChild(imgElem);
   articleElement.appendChild(nameElement);
-  articleElement.appendChild(statusElement);
+  articleElement.appendChild(continentElement);
 
   liElement.appendChild(articleElement);
 
@@ -95,9 +107,9 @@ function renderCards(character) {
 }
 
 //Función para pintar la lista completa de tarjetas de personajes
-function renderCharactersList() {
+function renderCountriesList() {
   cardsList.innerHTML = '';
-  for (const card of charactersList) {
+  for (const card of countriesList) {
     cardsList.appendChild(renderCards(card));
   }
 
@@ -113,34 +125,34 @@ function handleClickCard(event) {
 
   const current = parseInt(event.currentTarget.id);
 
-  const selectedCard = charactersList.find(
-    (eachCardObj) => eachCardObj.char_id === current
+  const selectedCard = countriesList.find(
+    (eachCardObj) => eachCardObj.id === current
   );
 
   //Busco el problema y era que una era string y otra number, uso typeof, por eso creo una variable donde recoger el nuevo valor (en nº) para comparar
 
-  const cardFavouriteIndex = favouriteCharacters.findIndex(
-    (eachCardObj) => eachCardObj.char_id === current
+  const cardFavouriteIndex = favouriteCountries.findIndex(
+    (eachCardObj) => eachCardObj.id === current
   );
 
   //Si no está en favoritos, haz el push
   if (cardFavouriteIndex === -1) {
-    favouriteCharacters.push(selectedCard);
+    favouriteCountries.push(selectedCard);
   } else {
     //añado la opción de que si el usuario vuelve a hacer click en el listado a una tarjeta favorita, también la quite de favoritos (no sólo clickando en la x de favoritas)
-    favouriteCharacters.splice(cardFavouriteIndex, 1);
+    favouriteCountries.splice(cardFavouriteIndex, 1);
     event.currentTarget.classList.remove('selected');
   }
   //guardo el listado de favoritas en localStorage, con las actualizaciones del if/else
-  localStorage.setItem('favourites', JSON.stringify(favouriteCharacters));
+  localStorage.setItem('favourites', JSON.stringify(favouriteCountries));
 
-  renderFavCharacters();
+  renderFavCountries();
 }
 
 //Función que crea un bucle para recorrer los elementos del array generado con QSA y así nos permite aplicarle el EVENTLISTENER a cada tarjeta del listado general
 function cardListeners() {
-  const allCharacterCards = document.querySelectorAll('.js-card');
-  for (const eachCard of allCharacterCards) {
+  const allCountryCards = document.querySelectorAll('.js-card');
+  for (const eachCard of allCountryCards) {
     eachCard.addEventListener('click', handleClickCard);
   }
 }
@@ -148,40 +160,50 @@ function cardListeners() {
 'use strict';
 
 //Función para pintar la tarjeta en sí, esta vez para los personajes favoritos
-function renderFavCard(favCharacter) {
+function renderFavCard(favCountry) {
   //Cambio la función para renderizar las tarjetas de favoritos con DOM avanzado
 
   const liElement = document.createElement('li');
   liElement.classList.add('cards-list-item');
 
   const articleElement = document.createElement('article');
-  articleElement.classList.add('card', 'js-fav-card', 'selected');
-  articleElement.setAttribute('id', favCharacter.char_id);
+  articleElement.classList.add('favcard', 'js-fav-card', 'selected');
+  articleElement.setAttribute('id', favCountry.id);
 
   const crossElement = document.createElement('i');
   crossElement.classList.add('fa-solid', 'fa-square-xmark');
 
   const imgElem = document.createElement('img');
-  imgElem.setAttribute('src', favCharacter.img);
-  imgElem.setAttribute('alt', `Picture of ${favCharacter.name}`);
-  imgElem.setAttribute('title', favCharacter.name);
+  imgElem.setAttribute('src', favCountry.img);
+  imgElem.setAttribute('alt', `Picture of ${favCountry.name}`);
+  imgElem.setAttribute('title', favCountry.name);
   imgElem.classList.add('card-img');
 
   const nameElement = document.createElement('h3');
   nameElement.classList.add('card-name');
-  const textNameElement = document.createTextNode(favCharacter.name);
+  const textNameElement = document.createTextNode(favCountry.name);
 
-  const statusElement = document.createElement('p');
-  statusElement.classList.add('card-status');
-  const textStatusElement = document.createTextNode(favCharacter.status);
+  const continentElement = document.createElement('p');
+  continentElement.classList.add('card-continent', 'favcard-text');
+  const textContinentElement = document.createTextNode(
+    `Continent: ${favCountry.continent}`
+  );
+
+  const capitalElement = document.createElement('p');
+  capitalElement.classList.add('card-capital', 'favcard-text');
+  const textCapitalElement = document.createTextNode(
+    `Capital: ${favCountry.capital[0]}`
+  );
 
   nameElement.appendChild(textNameElement);
-  statusElement.appendChild(textStatusElement);
+  continentElement.appendChild(textContinentElement);
+  capitalElement.appendChild(textCapitalElement);
 
   articleElement.appendChild(crossElement);
   articleElement.appendChild(imgElem);
   articleElement.appendChild(nameElement);
-  articleElement.appendChild(statusElement);
+  articleElement.appendChild(continentElement);
+  articleElement.appendChild(capitalElement);
 
   liElement.appendChild(articleElement);
 
@@ -190,8 +212,7 @@ function renderFavCard(favCharacter) {
 }
 
 function paintFavSection() {
-  console.log(favouriteCharacters.length);
-  if (favouriteCharacters.length !== 0) {
+  if (favouriteCountries.length !== 0) {
     favsSection.classList.remove('hidden');
   } else {
     favsSection.classList.add('hidden');
@@ -201,10 +222,10 @@ function paintFavSection() {
 }
 
 //Función para pintar el listado de tarjetas de mis favoritos, ahora con DOM
-function renderFavCharacters() {
+function renderFavCountries() {
   favCardsList.innerHTML = '';
 
-  for (const favCard of favouriteCharacters) {
+  for (const favCard of favouriteCountries) {
     favCardsList.appendChild(renderFavCard(favCard));
   }
   //Si tenemos favoritos en el listado, llamo a la función para pintar la sección de fav
@@ -216,19 +237,19 @@ function renderFavCharacters() {
 
 //Función para FILTRAR según lo que se escriba en el input (una vez dado al botón)
 function filterCards() {
-  let searchedCharacter = searchInput.value.toLowerCase();
+  let searchedCountry = searchInput.value.toLowerCase();
   cardsList.innerHTML = '';
 
-  const filteredCharacters = charactersList.filter((character) =>
-    character.name.toLowerCase().includes(searchedCharacter)
+  const filteredCountries = countriesList.filter((country) =>
+    country.name.toLowerCase().includes(searchedCountry)
   );
 
-  for (const character of filteredCharacters) {
-    cardsList.appendChild(renderCards(character));
+  for (const country of filteredCountries) {
+    cardsList.appendChild(renderCards(country));
   }
 
-  if (searchedCharacter === '') {
-    renderCharactersList();
+  if (searchedCountry === '') {
+    renderCountriesList();
   }
 }
 
@@ -246,7 +267,7 @@ function handleResetInput(event) {
   event.preventDefault();
   let inputData = searchInput.value.toLowerCase();
   if (inputData === '') {
-    renderCharactersList();
+    renderCountriesList();
   }
 }
 
@@ -263,7 +284,7 @@ function handleClickFavCard(event) {
   const current = parseInt(event.currentTarget.id);
   let cardFromWholeList = '';
 
-  const cardFavouriteIndex = favouriteCharacters.findIndex(
+  const cardFavouriteIndex = favouriteCountries.findIndex(
     (eachCardObj) => eachCardObj.char_id === current
   );
 
@@ -275,17 +296,17 @@ function handleClickFavCard(event) {
   cardFromWholeList = renderCards(findInWholeList);
   cardFromWholeList.classList.remove('selected');
 
-  renderFavCharacters();
-  renderCharactersList();
+  renderFavCountries();
+  renderCountriesList();
 
-  localStorage.setItem('favourites', JSON.stringify(favouriteCharacters));
+  localStorage.setItem('favourites', JSON.stringify(favouriteCountries));
 }
 
 //Bucle que recorre el array, esta vez para añadir listeners a las tarjetas favoritas
 function favCardListeners() {
-  const favCharacterCards = document.querySelectorAll('.js-fav-card');
+  const favCountriesCards = document.querySelectorAll('.js-fav-card');
 
-  for (const eachCard of favCharacterCards) {
+  for (const eachCard of favCountriesCards) {
     eachCard.addEventListener('click', handleClickFavCard);
   }
 }
@@ -294,7 +315,7 @@ function favCardListeners() {
 
 //Función para qeu el botón de reset aparezca sólo cuando hay favoritos
 function paintReset() {
-  if (favouriteCharacters.length !== 0) {
+  if (favouriteCountries.length !== 0) {
     resetButton.classList.remove('hidden');
   } else {
     resetButton.classList.add('hidden');
@@ -302,12 +323,12 @@ function paintReset() {
 
   function handleResetButton() {
     favCardsList.innerHTML = '';
-    favouriteCharacters = [];
-    localStorage.setItem('favourites', favouriteCharacters);
+    favouriteCountries = [];
+    localStorage.setItem('favourites', favouriteCountries);
     resetButton.classList.add('hidden');
     favsSection.classList.add('hidden');
-    const allCharacterCards = document.querySelectorAll('.js-card');
-    for (const eachCard of allCharacterCards) {
+    const allCountriesCards = document.querySelectorAll('.js-card');
+    for (const eachCard of allCountriesCards) {
       eachCard.classList.remove('selected');
     }
   }

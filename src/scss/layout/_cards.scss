@@ -1,25 +1,28 @@
 .cards-lists-container {
   margin-top: 10px;
   display: flex;
+  flex-direction: column;
   justify-content: center;
   gap: 12px;
   padding: 12px;
   @media all and (min-width: 768px) {
+    flex-direction: row;
     padding: 40px;
     gap: 20px;
   }
 }
 
 .cards-section {
+  display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
   text-align: center;
   gap: 20px;
 
   &-title {
     font-size: 18px;
-    color: $blueGreen;
+    color: $mainGreen;
     text-transform: capitalize;
     margin-bottom: 30px;
   }
@@ -52,8 +55,8 @@
   padding: 10px;
   cursor: pointer;
   background-color: $mainWhite;
-  width: 160px;
-  height: 240px;
+  width: 220px;
+  height: 140px;
   box-shadow: 1px 1px 4px 0px #afa9a9;
   display: flex;
   flex-direction: column;
@@ -61,43 +64,91 @@
   align-items: center;
 
   @media all and (min-width: 768px) {
-    width: 210px;
-    height: 300px;
+    width: 300px;
+    height: 210px;
   }
 
   &-img {
-    width: 120px;
-    height: 160px;
-    object-fit: cover;
+    /* max-width: 180px; */
+    max-height: 80px;
+    object-fit: contain;
 
     @media all and (min-width: 768px) {
-      width: 150px;
-      height: 210px;
+      max-height: 100px;
     }
   }
   &-name {
-    font-size: 15px;
+    font-size: 13px;
     font-weight: bold;
     padding: 5px 0 3px 0;
+    @media all and (min-width: 768px) {
+      font-size: 15px;
+    }
   }
-  &-status {
-    font-size: 14px;
+  &-continent {
+    font-size: 12px;
+    @media all and (min-width: 768px) {
+      font-size: 14px;
+    }
+  }
+}
+
+.favcard {
+  padding: 10px;
+  cursor: pointer;
+  background-color: $mainWhite;
+  width: 220px;
+  height: 180px;
+  box-shadow: 1px 1px 4px 0px #afa9a9;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+
+  @media all and (min-width: 768px) {
+    width: 280px;
+    height: 240px;
+  }
+
+  &-img {
+    width: 160px;
+    height: 120px;
+    object-fit: cover;
+
+    @media all and (min-width: 768px) {
+      width: 210px;
+      height: 150px;
+    }
+  }
+  &-name {
+    font-size: 13px;
+    font-weight: bold;
+    padding: 5px 0 3px 0;
+    @media all and (min-width: 768px) {
+      font-size: 15px;
+    }
+  }
+  &-text {
+    font-size: 11px;
+    @media all and (min-width: 768px) {
+      font-size: 14px;
+    }
   }
 }
 
 .selected {
-  background-color: $mainGreen;
+  background-color: $blueGreen;
   color: $mainWhite;
 }
 
 .fa-square-xmark {
   color: $mainWhite;
   font-size: 22px;
-  transform: translate(66px, -3px);
+  transform: translate(96px, -3px);
 
   @media all and (min-width: 768px) {
     font-size: 26px;
-    transform: translate(83px, -5px);
+    transform: translate(113px, -2px);
   }
 }
 

@@ -2,19 +2,19 @@
 
 //Función para FILTRAR según lo que se escriba en el input (una vez dado al botón)
 function filterCards() {
-  let searchedCharacter = searchInput.value.toLowerCase();
+  let searchedCountry = searchInput.value.toLowerCase();
   cardsList.innerHTML = '';
 
-  const filteredCharacters = charactersList.filter((character) =>
-    character.name.toLowerCase().includes(searchedCharacter)
+  const filteredCountries = countriesList.filter((country) =>
+    country.name.toLowerCase().includes(searchedCountry)
   );
 
-  for (const character of filteredCharacters) {
-    cardsList.appendChild(renderCards(character));
+  for (const country of filteredCountries) {
+    cardsList.appendChild(renderCards(country));
   }
 
-  if (searchedCharacter === '') {
-    renderCharactersList();
+  if (searchedCountry === '') {
+    renderCountriesList();
   }
 }
 
@@ -32,7 +32,7 @@ function handleResetInput(event) {
   event.preventDefault();
   let inputData = searchInput.value.toLowerCase();
   if (inputData === '') {
-    renderCharactersList();
+    renderCountriesList();
   }
 }
 

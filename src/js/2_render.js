@@ -1,17 +1,16 @@
 'use strict';
 
 //Función para pintar la tarjeta en sí, con sus elementos de html
-function renderCards(character) {
+function renderCards(country) {
   //Cambio la función para renderizar las tarjetas con DOM avanzado
 
   const liElement = document.createElement('li');
   liElement.classList.add('cards-list-item');
 
   const articleElement = document.createElement('article');
-  const current = character.char_id;
 
-  const cardFavouriteIndex = favouriteCharacters.findIndex(
-    (eachCardObj) => eachCardObj.char_id === current
+  const cardFavouriteIndex = favouriteCountries.findIndex(
+    (eachCardObj) => eachCardObj.id === country.id
   );
 
   if (cardFavouriteIndex !== -1) {
@@ -20,28 +19,28 @@ function renderCards(character) {
     articleElement.classList.add('card', 'js-card');
   }
 
-  articleElement.setAttribute('id', character.char_id);
+  articleElement.setAttribute('id', country.id);
 
   const imgElem = document.createElement('img');
-  imgElem.setAttribute('src', character.img);
-  imgElem.setAttribute('alt', `Picture of ${character.name}`);
-  imgElem.setAttribute('title', character.name);
+  imgElem.setAttribute('src', country.img);
+  imgElem.setAttribute('alt', country.alt);
+  imgElem.setAttribute('title', country.name);
   imgElem.classList.add('card-img');
 
   const nameElement = document.createElement('h3');
   nameElement.classList.add('card-name');
-  const textNameElement = document.createTextNode(character.name);
+  const textNameElement = document.createTextNode(country.name);
 
-  const statusElement = document.createElement('p');
-  statusElement.classList.add('card-status');
-  const textStatusElement = document.createTextNode(character.status);
+  const continentElement = document.createElement('p');
+  continentElement.classList.add('card-continent');
+  const textContinentElement = document.createTextNode(country.continent);
 
   nameElement.appendChild(textNameElement);
-  statusElement.appendChild(textStatusElement);
+  continentElement.appendChild(textContinentElement);
 
   articleElement.appendChild(imgElem);
   articleElement.appendChild(nameElement);
-  articleElement.appendChild(statusElement);
+  articleElement.appendChild(continentElement);
 
   liElement.appendChild(articleElement);
 
@@ -51,9 +50,9 @@ function renderCards(character) {
 }
 
 //Función para pintar la lista completa de tarjetas de personajes
-function renderCharactersList() {
+function renderCountriesList() {
   cardsList.innerHTML = '';
-  for (const card of charactersList) {
+  for (const card of countriesList) {
     cardsList.appendChild(renderCards(card));
   }
 

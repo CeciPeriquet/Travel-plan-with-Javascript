@@ -11,7 +11,7 @@ const resetButton = document.querySelector('.js-reset-btn');
 const favsSection = document.querySelector('.js-fav-cards');
 
 // Declaro un array vacío donde luego irán los datos de la API
-let charactersList = [];
+let countriesList = [];
 
 //Array de favoritos (también vacío) a partir de las tarjetas seleccionadas
-let favouriteCharacters = [];
+let favouriteCountries = [];
