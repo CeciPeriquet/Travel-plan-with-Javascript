@@ -2,35 +2,34 @@
 
 ## Cecilia Periquet
 
-Hola, éste es mi ejercicio para la evaluación final del Módulo 2 del bootcamp de Web Development de Adalab, consistente en JavaScript (aunque, como verás, también he utilizado HTML y CSS para llevarlo a cabo).
+Hi there, this was my final evaluation exercise from the second module of Adalab Web Development Bootcamp, with JavaScript (ES6-VANILLA). As you can see, I also built it with HTML and SASS.
 
-## Tecnologías
+## Tecnologies
 
-Este repositorio utiliza el **Starter Kit de Adalab** (por eso he podido utilizar SASS con partials, así como partials de JavaScript, manteniendo mucho más limpio mi código).
-Al final del todo encontrarás las instrucciones necesarias para usarlo y entenderlo mejor (ya que necesitas, por ejemplo, tener instalado [Node JS](https://nodejs.org/) para trabajar con este Starter Kit).
+This repo uses the **Starter Kit de Adalab** (reason why I could use Sass with partials & nesting, and also JavaScript partials so I could have a better organized and cleaner code).
+At the end of this document you'll find the instructions to use it and have a better understanding of it (for example, you'll need to have [Node JS](https://nodejs.org/) installed).
 
 ## Enunciado
 
-El ejercicio pedía la realización de una web con un buscador de personajes de **Breaking Bad**, en el que se mostraran tarjetas con una fotografía, el nombre, y el estado (vivo o muerto).
-Estos datos se recogen directamente de la siguiente [API](https://breakingbadapi.com/) y clickando en las tarjetas de personajes, puedes ir guardando un listado de favoritos, que quedará registrado también en el **LocalStorage** de manera que permanece en la página aunque se refresque.
+At the beginning it was about Breaking Bad, but I've recently change the whole theme and API, in order to have different exercisses from my coleagues.
 
-También puedes buscar directamente a tus personajes usando el formulario y el botón corresponiente, y de ahí seleccionarlos como favoritos.
+We had to call this [API](https://breakingbadapi.com/) and show a list of characters, with their name and status (dead or alive). I just changed it to a list of countries you may want to visit, using this other [API](https://restcountries.com/) and showing the flag, the country name and also the continent (well, I also changed the whole project because that aAPI it's not working anymore and I used a json file for a while, but I prefered to show a real fetch).
+
+When you click on a card, it changes styles and appears a new column with your favourite countries (the ones you want to visit) and also new information about them, like their capital. This favourite list can be saved in **LocalStorage** so no problem if you refresh the browser.
+
+You can also look for a country in the top form, no matter if you only uses lowercase in the input box, it'll find it.
 
 ## Bonus
 
-Los favoritos pueden borrarse tanto ckickando en el listado de favoritos, como en el listado normal, y todos ellos de golpe usando el botón de **reset** (que también los elimina del localStorage).
+I created a **reset** button in order to delete all your favourite countries in case you change your mind, it's also delete them from LocalStorage. You can also delete them one by one by using the **little cross icon** that appears on the favourite cards (that by the way it's also a bonus).
 
-Tanto el botón de reset de los personajes favoritos, como el hecho de que los puedas cerrar desde todas partes, como que aparezcan en el listado de favoritos con una x sobre la que clickar... son todo parte del bonus. Igualmente la maquetación, que aunque prima JavaScript, siempre se agradece algo de CSS.
+I decided to not show the countries you want to visit column nor the reset button until the user has selected any country.
 
-He optado por no mostrar el listado de favoritos ni el botón de reset hasta que la usuaria marca algún personaje como favorito.
+As you can see, the cards and its tags, atributes, classes...are generated manipulating the DOM with JavaScript.
 
-![BreakingBad_cperiquet](https://user-images.githubusercontent.com/112966265/201921222-2797f043-1428-4e71-ae8e-bee39c29c8d2.png)
+You probably know how to do it quicker, better and with less amount of code, but I think it's not a bad exercisse for a beginner in JS.
 
-Posiblemente pensarás que podría estar mucho mejor, con un código más reducido, no tan repetitivo, pero si tenemos en cuenta que hace 3 semanas no sabía ni lo que era JavaScript... ni tan mal.
-
-No dejes de ver el resultado en la web adjunta al repositorio y sobre todo ¡jugar con tus personajes favoritos de la serie!
-
-![BreakingBad_cperiquet-favsection](https://user-images.githubusercontent.com/112966265/201921518-c6d97f87-604c-4936-9414-35c9e1167ad4.png)
+Hope you like it and please test it, select your favourite countries and send me any feedback you have!
 
 ## Adalab web starter kit
 
