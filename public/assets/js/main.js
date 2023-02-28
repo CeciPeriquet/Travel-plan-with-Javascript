@@ -23,17 +23,21 @@ function getData() {
   fetch('https://restcountries.com/v3.1/all/')
     .then((response) => response.json())
     .then((data) => {
-      const cleanData = data.map((country) => {
-        return {
-          name: country.name.common,
-          id: Math.floor(Math.random() * 500),
-          img: country.flags.png,
-          alt: country.flags.alt,
-          continent: country.continents[0],
-          capital: country.capital,
-          currencies: country.currencies,
-        };
-      });
+      const cleanData = data
+        .map((country) => {
+          return {
+            name: country.name.common,
+            id: Math.floor(Math.random() * 500),
+            img: country.flags.png,
+            alt: country.flags.alt,
+            continent: country.continents[0],
+            capital: country.capital,
+            currencies: country.currencies,
+          };
+        })
+        .sort((a, b) =>
+          a.name.toLowerCase().localeCompare(b.name.toLowerCase())
+        );
       console.log(cleanData);
 
       countriesList = cleanData;
@@ -175,7 +179,7 @@ function renderFavCard(favCountry) {
 
   const imgElem = document.createElement('img');
   imgElem.setAttribute('src', favCountry.img);
-  imgElem.setAttribute('alt', `Picture of ${favCountry.name}`);
+  imgElem.setAttribute('alt', favCountry.alt);
   imgElem.setAttribute('title', favCountry.name);
   imgElem.classList.add('card-img');
 
@@ -285,12 +289,12 @@ function handleClickFavCard(event) {
   let cardFromWholeList = '';
 
   const cardFavouriteIndex = favouriteCountries.findIndex(
-    (eachCardObj) => eachCardObj.char_id === current
+    (eachCardObj) => eachCardObj.id === current
   );
 
-  favouriteCharacters.splice(cardFavouriteIndex, 1);
-  const findInWholeList = charactersList.find(
-    (eachCardObj) => eachCardObj.char_id === current
+  favouriteCountries.splice(cardFavouriteIndex, 1);
+  const findInWholeList = countriesList.find(
+    (eachCardObj) => eachCardObj.id === current
   );
 
   cardFromWholeList = renderCards(findInWholeList);
@@ -324,7 +328,7 @@ function paintReset() {
   function handleResetButton() {
     favCardsList.innerHTML = '';
     favouriteCountries = [];
-    localStorage.setItem('favourites', favouriteCountries);
+    localStorage.removeItem('favourites');
     resetButton.classList.add('hidden');
     favsSection.classList.add('hidden');
     const allCountriesCards = document.querySelectorAll('.js-card');

@@ -6,7 +6,7 @@
   gap: 12px;
   padding: 12px;
   @media all and (min-width: 768px) {
-    flex-direction: row;
+    flex-direction: row-reverse;
     padding: 40px;
     gap: 20px;
   }
@@ -23,7 +23,7 @@
   &-title {
     font-size: 18px;
     color: $mainGreen;
-    text-transform: capitalize;
+    text-transform: uppercase;
     margin-bottom: 30px;
   }
   &-list {

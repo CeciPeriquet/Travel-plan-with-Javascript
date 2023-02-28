@@ -5,17 +5,21 @@ function getData() {
   fetch('https://restcountries.com/v3.1/all/')
     .then((response) => response.json())
     .then((data) => {
-      const cleanData = data.map((country) => {
-        return {
-          name: country.name.common,
-          id: Math.floor(Math.random() * 500),
-          img: country.flags.png,
-          alt: country.flags.alt,
-          continent: country.continents[0],
-          capital: country.capital,
-          currencies: country.currencies,
-        };
-      });
+      const cleanData = data
+        .map((country) => {
+          return {
+            name: country.name.common,
+            id: Math.floor(Math.random() * 500),
+            img: country.flags.png,
+            alt: country.flags.alt,
+            continent: country.continents[0],
+            capital: country.capital,
+            currencies: country.currencies,
+          };
+        })
+        .sort((a, b) =>
+          a.name.toLowerCase().localeCompare(b.name.toLowerCase())
+        );
       console.log(cleanData);
 
       countriesList = cleanData;

@@ -6,12 +6,12 @@ function handleClickFavCard(event) {
   let cardFromWholeList = '';
 
   const cardFavouriteIndex = favouriteCountries.findIndex(
-    (eachCardObj) => eachCardObj.char_id === current
+    (eachCardObj) => eachCardObj.id === current
   );
 
-  favouriteCharacters.splice(cardFavouriteIndex, 1);
-  const findInWholeList = charactersList.find(
-    (eachCardObj) => eachCardObj.char_id === current
+  favouriteCountries.splice(cardFavouriteIndex, 1);
+  const findInWholeList = countriesList.find(
+    (eachCardObj) => eachCardObj.id === current
   );
 
   cardFromWholeList = renderCards(findInWholeList);

@@ -75,7 +75,7 @@
   padding: 12px; }
   @media all and (min-width: 768px) {
     .cards-lists-container {
-      flex-direction: row;
+      flex-direction: row-reverse;
       padding: 40px;
       gap: 20px; } }
 
@@ -89,7 +89,7 @@
   .cards-section-title {
     font-size: 18px;
     color: #008378;
-    text-transform: capitalize;
+    text-transform: uppercase;
     margin-bottom: 30px; }
   .cards-section-list {
     display: flex;

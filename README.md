@@ -9,7 +9,7 @@ Hi there, this was my final evaluation exercise from the second module of Adalab
 This repo uses the **Starter Kit de Adalab** (reason why I could use Sass with partials & nesting, and also JavaScript partials so I could have a better organized and cleaner code).
 At the end of this document you'll find the instructions to use it and have a better understanding of it (for example, you'll need to have [Node JS](https://nodejs.org/) installed).
 
-## Enunciado
+## Statement
 
 At the beginning it was about Breaking Bad, but I've recently change the whole theme and API, in order to have different exercisses from my coleagues.
 

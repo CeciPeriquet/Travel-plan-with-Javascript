@@ -16,7 +16,7 @@ function renderFavCard(favCountry) {
 
   const imgElem = document.createElement('img');
   imgElem.setAttribute('src', favCountry.img);
-  imgElem.setAttribute('alt', `Picture of ${favCountry.name}`);
+  imgElem.setAttribute('alt', favCountry.alt);
   imgElem.setAttribute('title', favCountry.name);
   imgElem.classList.add('card-img');
 

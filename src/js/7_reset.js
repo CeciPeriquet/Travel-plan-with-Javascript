@@ -11,7 +11,7 @@ function paintReset() {
   function handleResetButton() {
     favCardsList.innerHTML = '';
     favouriteCountries = [];
-    localStorage.setItem('favourites', favouriteCountries);
+    localStorage.removeItem('favourites');
     resetButton.classList.add('hidden');
     favsSection.classList.add('hidden');
     const allCountriesCards = document.querySelectorAll('.js-card');
